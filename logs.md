@@ -11,4 +11,9 @@ Get delete all working.
 - [x] TODO: Individual item deletion
 - [ ] Auto Animate
 - [ ] Flip item layout flow, bottom to top
+- [ ] Sync changes across devices
+
+### 1026
 - [x] Implement Toast to give feedback on actions.
+- [x] Infer post router output types to component to use 
+- [ ] Sync changes across devices, or just refetch on given intervals, for now

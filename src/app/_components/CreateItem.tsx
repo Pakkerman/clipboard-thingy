@@ -29,11 +29,11 @@ export default function CreatItem() {
         placeholder="Type Something"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        className="w-full rounded-full px-4 py-2 text-black"
+        className="w-full rounded-full px-4 py-2 text-black drop-shadow-md"
       />
       <button
         type="submit"
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
+        className="rounded-full bg-slate-500/10 drop-shadow-md border-[0.5px] border-slate-900/20 px-10 py-3 font-semibold transition hover:bg-white/20"
         disabled={createPost.isLoading || name.length === 0}
       >
         {createPost.isLoading ? "Submitting..." : "Submit"}

@@ -8,7 +8,7 @@ export default async function Home() {
   // const allContent = await api.post.getAll.query();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-900 to-slate-800 text-white">
+    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-50 to-slate-200 text-slate-900">
       {/* <ClipboardItem /> */}
       {/* <CrudShowcase /> */}
       <Clipboard />
