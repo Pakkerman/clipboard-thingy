@@ -5,6 +5,7 @@ import { headers } from "next/headers"
 
 import { TRPCReactProvider } from "~/trpc/react"
 import { ClipboardContextProvider } from "./context/ClipboardContext"
+import { NavContextProvider } from "./context/NavContext"
 import { Toaster } from "react-hot-toast"
 
 const roboto = Roboto({
@@ -28,9 +29,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${roboto.variable}`}>
         <Toaster />
-        <ClipboardContextProvider>
-          <TRPCReactProvider headers={headers()}>{children}</TRPCReactProvider>
-        </ClipboardContextProvider>
+        <NavContextProvider>
+          <ClipboardContextProvider>
+            <TRPCReactProvider headers={headers()}>
+              {children}
+            </TRPCReactProvider>
+          </ClipboardContextProvider>
+        </NavContextProvider>
       </body>
     </html>
   )

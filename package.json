@@ -1,10 +1,11 @@
 {
-  "name": "app-router-demo",
+  "name": "clipboard-thingy",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "build": "next build",
     "db:push": "dotenv drizzle-kit push:mysql",
+    "db:generate": "dotenv drizzle-kit generate:mysql",
     "db:studio": "dotenv drizzle-kit studio",
     "dev": "next dev",
     "lint": "next lint",
@@ -18,6 +19,7 @@
     "@trpc/next": "^10.37.1",
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
+    "@uploadthing/react": "^5.7.0",
     "drizzle-orm": "^0.28.5",
     "next": "^13.5.4",
     "react": "18.2.0",
@@ -25,6 +27,7 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
     "superjson": "^1.13.1",
+    "uploadthing": "^5.7.2",
     "zod": "^3.22.4"
   },
   "devDependencies": {

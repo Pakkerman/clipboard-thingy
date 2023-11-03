@@ -1,6 +1,6 @@
-import { type Config } from "drizzle-kit";
+import { type Config } from "drizzle-kit"
 
-import { env } from "~/env.mjs";
+import { env } from "~/env.mjs"
 
 export default {
   schema: "./src/server/db/schema.ts",
@@ -8,5 +8,5 @@ export default {
   dbCredentials: {
     connectionString: env.DATABASE_URL,
   },
-  tablesFilter: ["app-router-demo_*"],
-} satisfies Config;
+  tablesFilter: ["clipboard-thingy_*"],
+} satisfies Config

@@ -17,3 +17,20 @@ Get delete all working.
 - [x] Implement Toast to give feedback on actions.
 - [x] Infer post router output types to component to use 
 - [ ] Sync changes across devices, or just refetch on given intervals, for now
+- ADDED: uploadthing
+
+### 1030
+- Create another route for files table. After uploading a file successfully, will add record of the file into the database.
+    - getAll
+    - createRecord
+    - deleteRecord
+- [ ] TODO: Join posts and files query together
+
+### 1103
+- [x] TODO: Nav between two tabs, files and text items
+  - [x] create useNavContext
+- CORE FEATURE: able to delete file from clipboard
+- [x] TODO: Allow other types of files, text, pdf... to be upload
+- [x] TODO: One click download button, no pop-up (if user disabled option to ask where to save file in browser)
+- Exact image thumbnail
+- [ ] TODO: Add image hover preview

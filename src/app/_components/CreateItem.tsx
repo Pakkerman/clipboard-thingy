@@ -36,7 +36,7 @@ export default function CreatItem() {
         className="rounded-full bg-slate-500/10 drop-shadow-md border-[0.5px] border-slate-900/20 px-10 py-3 font-semibold transition hover:bg-white/20"
         disabled={createPost.isLoading || name.length === 0}
       >
-        {createPost.isLoading ? "Submitting..." : "Submit"}
+        {createPost.isLoading ? "Saving..." : "Save"}
       </button>
     </form>
   )
