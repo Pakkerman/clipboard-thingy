@@ -1,6 +1,6 @@
 import "~/styles/globals.css"
 
-import { Roboto } from "next/font/google"
+import { Roboto, Chakra_Petch } from "next/font/google"
 import { headers } from "next/headers"
 
 import { TRPCReactProvider } from "~/trpc/react"
@@ -12,6 +12,13 @@ const roboto = Roboto({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-sans",
+})
+
+const chakraPetch = Chakra_Petch({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["italic"],
+  variable: "--font-chakraPetch",
 })
 
 export const metadata = {
@@ -27,7 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${roboto.variable}`}>
+      <body className={`font-sans ${roboto.variable} ${chakraPetch.variable}`}>
         <Toaster />
         <NavContextProvider>
           <ClipboardContextProvider>

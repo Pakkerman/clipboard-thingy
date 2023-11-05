@@ -1,9 +1,11 @@
 import React from "react"
+import { FiDownload } from "react-icons/fi"
 
 type DownloadFileButtonProps = { url: string }
 export function DownloadButton(props: DownloadFileButtonProps) {
   return (
     <button
+      className="h-6 z-10 border rounded-lg flex items-center grow gap-1 justify-center"
       onClick={() =>
         fetch(props.url, {
           method: "GET",
@@ -25,7 +27,8 @@ export function DownloadButton(props: DownloadFileButtonProps) {
           })
       }
     >
-      Download
+      <span className="text-sm">Download</span>
+      <FiDownload size={14} />
     </button>
   )
 }

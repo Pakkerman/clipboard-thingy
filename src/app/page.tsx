@@ -17,7 +17,9 @@ export default async function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-slate-50 to-slate-200 text-slate-900 pb-20">
-      <h1 className="text-4xl py-4">ClipBroker</h1>
+      <h1 className="font-chakraPetch text-5xl py-6 tracking-wider">
+        Clipbroker
+      </h1>
       <Clipboard />
       <Nav />
       <CreateItem />

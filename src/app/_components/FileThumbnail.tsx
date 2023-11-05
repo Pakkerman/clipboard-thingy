@@ -1,5 +1,6 @@
 import React from "react"
 import Image from "next/image"
+import { HiOutlineDocumentText } from "react-icons/hi"
 
 type FileThumbnailProps = { url: string | null }
 export function FileThumbnail(props: FileThumbnailProps) {
@@ -12,13 +13,20 @@ export function FileThumbnail(props: FileThumbnailProps) {
           <Image src={props.url!} alt="file preview" width={300} height={300} />
         </div>
       )} */}
-      <Image
-        className="border rounded "
-        width={40}
-        height={40}
-        src={props.url && isImage ? props.url : "/images/file_icon.png"}
-        alt="file thumbnail"
-      />
+      {isImage ? (
+        <Image
+          className="border rounded-lg w-[72px] h-[72px] object-cover"
+          width={72}
+          height={72}
+          src={props.url && isImage ? props.url : "/images/file_icon.png"}
+          alt="file thumbnail"
+        />
+      ) : (
+        <HiOutlineDocumentText
+          size={72}
+          className="text-slate-600 border rounded-lg"
+        />
+      )}
     </div>
   )
 }

@@ -10,9 +10,10 @@ export const { UploadButton, UploadDropzone, Uploader } =
   generateComponents<OurFileRouter>()
 
 export default function uploadthing() {
+  const utils = api.useUtils()
   const { mutate } = api.file.createRecord.useMutation({
-    onSuccess: () => {
-      console.log("sueecess and added")
+    onSuccess: async () => {
+      utils.file.getAll.invalidate()
       toast.success("Upload Completed")
     },
   })

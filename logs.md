@@ -34,3 +34,12 @@ Get delete all working.
 - [x] TODO: One click download button, no pop-up (if user disabled option to ask where to save file in browser)
 - Exact image thumbnail
 - [ ] TODO: Add image hover preview
+
+### 1104
+- [x] TODO: Optimistic update on delete file
+- ADDED: AutoAnimate 
+
+### 1105
+- [x] TODO: url text with open button
+- Style link and delete button, added react icons
+- Style clipboard item list

@@ -34,9 +34,11 @@ export const posts = mysqlTable(
   }),
 )
 
-export const scraps = mysqlTable("scrap", {
+export const texts = mysqlTable("text", {
   id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-  name: varchar("name", { length: 256 }),
+
+  userId: varchar("userId", { length: 256 }),
+  content: varchar("content", { length: 256 }),
 
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
@@ -47,6 +49,7 @@ export const scraps = mysqlTable("scrap", {
 export const files = mysqlTable("file", {
   id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
 
+  userId: varchar("userId", { length: 256 }),
   name: varchar("fileName", { length: 256 }).notNull(),
   key: varchar("key", { length: 256 }).notNull(),
   url: varchar("url", { length: 256 }).notNull(),

@@ -38,6 +38,12 @@ export const fileRouter = createTRPCRouter({
       await ctx.db.delete(files).where(eq(files.id, input.id))
       await utapi.deleteFiles(input.key)
     }),
+
+  deleteAll: publicProcedure.mutation(async ({ ctx }) => {
+    await ctx.db.delete(files)
+    const fileKeyList = (await utapi.listFiles()).map((item) => item.key)
+    await utapi.deleteFiles(fileKeyList)
+  }),
 })
 
 export type FileRouter = typeof fileRouter

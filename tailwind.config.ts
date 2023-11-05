@@ -8,6 +8,7 @@ export default withUt({
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
+        chakraPetch: ["var(--font-chakraPetch)"],
       },
     },
   },
