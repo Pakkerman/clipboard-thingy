@@ -26,7 +26,10 @@ export default function CreatItem() {
   })
 
   return (
-    <section className="w-[350px] font-chakraPetch" ref={animationParent}>
+    <section
+      className="h-min min-h-[150px] w-[350px] font-chakraPetch"
+      ref={animationParent}
+    >
       {tab === "text" && (
         <form
           onSubmit={(e) => {
@@ -35,9 +38,10 @@ export default function CreatItem() {
           }}
           className="flex flex-col gap-4 px-4"
         >
+          {text.length > 255 && <div className="text-red-400">too long, </div>}
           <textarea
             ref={textareaRef}
-            className="w-full rounded-lg px-4 py-2 text-black drop-shadow-md"
+            className="w-full rounded-lg px-4 py-2 text-black shadow-md"
             onChange={(e) => setText(e.target.value)}
             placeholder="Type Something"
             value={text}
