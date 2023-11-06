@@ -1,11 +1,17 @@
+import Link from "next/link"
 import React from "react"
 import { AiOutlineGithub } from "react-icons/ai"
 
 export default function Footer() {
   return (
-    <footer className="text-grey-800 absolute bottom-0 left-0 flex w-full items-center justify-center gap-2 p-2 text-xs">
-      <p className="">A project by Pakerman.</p>
-      <AiOutlineGithub size={20} />
+    <footer className="absolute bottom-0 left-0 flex w-[98vw] items-center justify-end gap-2 p-2 text-xs text-gray-600">
+      {/* <p className="">A project by Pakerman</p> */}
+      <Link
+        href="https://github.com/Pakkerman/clipboard-thingy"
+        target="_blank"
+      >
+        <AiOutlineGithub size={24} className="hover:text-gray-500" />
+      </Link>
     </footer>
   )
 }
