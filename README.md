@@ -2,7 +2,7 @@
 
 Having trouble copying stuff among your devices? Clipbroker is here to help. A web clipboard that can easily enable you to copy text across platforms, as long as you have internet access and a webrwoser.
 
-### Main Features
+### Core Features
 - Create and copy texts across devices
 - Simple file uploader for quickly trasnfer file to another device
 
@@ -13,5 +13,7 @@ Having trouble copying stuff among your devices? Clipbroker is here to help. A w
 - [DrizzleORM](https://orm.drizzle.team/)
 - [tRPC](https://trpc.io)
 - [Tailwind CSS](https://tailwindcss.com)
+- Database powered by [PlanetScale](https://app.planetscale.com/)
+- File upload powered by [Uploadthing](https://uploadthing.com/)
 - Deployed on [Vercel](https://vercel.com/)
 
