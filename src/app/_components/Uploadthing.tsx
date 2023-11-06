@@ -18,12 +18,13 @@ export default function uploadthing() {
       utils.file.getAll.invalidate()
       toast.success("Upload Completed", { id: "upload file" })
       setTab("file")
+      window.scrollTo({ behavior: "smooth", top: 0 })
     },
   })
 
   return (
-    <UploadDropzone
-      className="cursor-pointer"
+    <UploadButton
+      className="cursor-pointer ut-button:rounded-lg ut-button:bg-orange-500/70 ut-button:drop-shadow-md ut-button:border-[0.5px] ut-button:border-slate-900/20 ut-button:px-10 ut-button:py-3 ut-button:font-semibold ut-button:transition ut-button:hover:bg-orange-300 ut-button:w-[325px] ut-button:text-gray-800 font-chakraPetch"
       endpoint="fileUploader"
       onClientUploadComplete={(res) => {
         // console.log("Files: ", res)

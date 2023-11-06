@@ -51,3 +51,6 @@ Get delete all working.
 - EXTRACT: FileList.tsx
 - Change text create input to textarea, and make it auto resize based on the scroll height
 - Add auto scrolling to improve UX
+- Change CreateItem layout and behaivors
+- [ ] TODO: Footer
+  - [ ] Add personal site

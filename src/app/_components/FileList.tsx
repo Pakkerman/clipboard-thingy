@@ -31,12 +31,12 @@ export function FileList() {
       {fileData?.map((item) => (
         <li
           key={item.id}
-          className="flex min-h-[90px] cursor-pointer  items-center justify-center rounded-xl  border hover:shadow-md transition active:shadow-inner shadow-black/20 w-[300px] gap-2"
+          className="flex min-h-[90px] w-[300px]  cursor-pointer items-center justify-center  gap-2 rounded-xl border shadow-black/20 transition hover:shadow-md active:shadow-inner"
         >
           <div className="flex flex-col gap-2">
-            <div className="flex border rounded-lg h-8 items-center">
-              <p className="w-[150px] line-clamp-1 pl-2">{item.name}</p>
-              <div className="w-[50px] flex pr-1">
+            <div className="flex h-8 items-center rounded-lg border">
+              <p className="line-clamp-1 w-[150px] pl-2">{item.name}</p>
+              <div className="flex w-[50px] pr-1">
                 <p className="text-sm uppercase">
                   {item.name.split(".").at(-1)}
                 </p>
@@ -47,7 +47,7 @@ export function FileList() {
                 )}
               </div>
             </div>
-            <div className="flex gap-2 w-[200px] justify-between">
+            <div className="flex w-[200px] justify-between gap-2">
               <DownloadButton url={item.url} />
               <DeleteButton
                 handleClick={() => deleteFile({ id: item.id, key: item.key })}
@@ -67,7 +67,7 @@ export function DeleteButton(props: DeleteButtonProps) {
 
   return (
     <button
-      className="h-6 border rounded-lg flex items-center pl-1 grow gap-1 hover:border-black justify-center"
+      className="flex h-6 grow items-center justify-center gap-1 rounded-lg border pl-1 hover:border-black"
       onClick={handleClick}
     >
       <span className="text-sm">Delete</span>
@@ -80,7 +80,7 @@ type DownloadFileButtonProps = { url: string }
 export function DownloadButton(props: DownloadFileButtonProps) {
   return (
     <button
-      className="h-6 border rounded-lg flex items-center grow gap-1 justify-center"
+      className="flex h-6 grow items-center justify-center gap-1 rounded-lg border"
       onClick={() => {
         toast.loading("Getting file...", { id: "fetching file" })
         fetch(props.url, {

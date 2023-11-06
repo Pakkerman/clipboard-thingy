@@ -20,12 +20,21 @@ export function TextList() {
     toast.success("coped!", { id: "copy success" })
   }
 
+  if (data && data.length === 0)
+    return (
+      <div className="flex h-full flex-col justify-center">
+        <h1 className="text-center font-chakraPetch text-slate-900/30">
+          so empty...
+        </h1>
+      </div>
+    )
+
   return (
     <>
       {data?.map((item) => (
         <li
           key={item.id}
-          className={`relative flex min-h-[80px] cursor-pointer flex-col items-center justify-center rounded-xl  border hover:shadow-md transition active:shadow-inner shadow-black/20 w-[300px] ${
+          className={`relative flex min-h-[80px] w-[300px] cursor-pointer flex-col items-center justify-center  rounded-xl border shadow-black/20 transition hover:shadow-md active:shadow-inner ${
             selected === item.id
               ? "shadow-inner hover:shadow-inner"
               : "shadow-none"
@@ -46,7 +55,7 @@ function LinkButton({ url }: any) {
 
   return (
     <button
-      className="absolute right-2 bottom-2 h-6 w-6 z-10 border rounded-lg "
+      className="absolute bottom-2 right-2 z-10 h-6 w-6 rounded-lg border "
       onClick={(event) => {
         event.stopPropagation()
         window.open(url, "_blank")
@@ -69,7 +78,7 @@ function DeleteButton({ id }: DeleteButtonProps) {
 
   return (
     <button
-      className="absolute right-2 top-2 h-6 w-6 z-10 border rounded-lg"
+      className="absolute right-2 top-2 z-10 h-6 w-6 rounded-lg border"
       onClick={(event) => {
         event.stopPropagation()
         mutate({ id })

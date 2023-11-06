@@ -4,6 +4,7 @@ import React, {
   SetStateAction,
   createContext,
   useContext,
+  useEffect,
   useState,
 } from "react"
 
@@ -16,7 +17,11 @@ type NavContext = {
 
 const NavContext = createContext<NavContext | null>(null)
 export function NavContextProvider(props: NavContextProviderProps) {
-  const [tab, setTab] = useState<Tab>("file")
+  const [tab, setTab] = useState<Tab>("text")
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" })
+  }, [tab])
 
   return (
     <NavContext.Provider value={{ tab, setTab }}>

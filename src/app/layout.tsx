@@ -17,7 +17,7 @@ const roboto = Roboto({
 const chakraPetch = Chakra_Petch({
   subsets: ["latin"],
   weight: ["400"],
-  style: ["italic"],
+  style: ["normal", "italic"],
   variable: "--font-chakraPetch",
 })
 
