@@ -5,23 +5,26 @@ import type { OurFileRouter } from "~/app/api/uploadthing/core"
 import React from "react"
 import toast from "react-hot-toast"
 import { api } from "~/trpc/react"
+import { useNavContext } from "../context/NavContext"
 
 export const { UploadButton, UploadDropzone, Uploader } =
   generateComponents<OurFileRouter>()
 
 export default function uploadthing() {
   const utils = api.useUtils()
+  const { setTab } = useNavContext()
   const { mutate } = api.file.createRecord.useMutation({
     onSuccess: async () => {
       utils.file.getAll.invalidate()
-      toast.success("Upload Completed")
+      toast.success("Upload Completed", { id: "upload file" })
+      setTab("file")
     },
   })
 
   return (
     <UploadDropzone
       className="cursor-pointer"
-      endpoint="uploader"
+      endpoint="fileUploader"
       onClientUploadComplete={(res) => {
         // console.log("Files: ", res)
 

@@ -22,9 +22,14 @@ export function ClipboardContextProvider(props: ClipboardContextProviderProps) {
   const [selected, setSelected] = useState<number | null>(null)
 
   useEffect(() => {
-    navigator.clipboard.readText().then((text) => {
-      setContent(text)
-    })
+    navigator.clipboard
+      .readText()
+      .then((text) => {
+        setContent(text)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }, [])
 
   return (

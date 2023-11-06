@@ -43,3 +43,11 @@ Get delete all working.
 - [x] TODO: url text with open button
 - Style link and delete button, added react icons
 - Style clipboard item list
+
+### 1106
+- [ ] TODO: Share page via qrcode
+- EXTRACT: FileDeleteButton
+- EXTRACT: TextList.tsx
+- EXTRACT: FileList.tsx
+- Change text create input to textarea, and make it auto resize based on the scroll height
+- Add auto scrolling to improve UX
