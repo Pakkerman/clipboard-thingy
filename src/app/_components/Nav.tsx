@@ -8,10 +8,10 @@ export default function Nav() {
 
   return (
     <nav className="py-4">
-      <ul className="flex w-[80vw] justify-between gap-2 max-w-[400px]">
+      <ul className="flex w-[80vw] max-w-[325px] justify-between gap-2">
         <li className="grow">
           <button
-            className={`border rounded-xl border-slate-900/20 py-2 px-4 transition w-full
+            className={`w-full rounded-xl border border-slate-900/20 px-4 py-2 transition
             hover:shadow-md 
             ${
               tab === "text" ? "shadow-inner shadow-black/25 " : ""
@@ -23,8 +23,8 @@ export default function Nav() {
         </li>
         <li className="grow">
           <button
-            className={`border rounded-xl border-slate-900/20 py-2 px-4 transition 
-            w-full hover:shadow-md active:shadow-inner
+            className={`w-full rounded-xl border border-slate-900/20 px-4 py-2 
+            transition hover:shadow-md active:shadow-inner
             ${tab === "file" ? "shadow-inner shadow-black/25 " : ""}`}
             onClick={() => setTab("file")}
           >

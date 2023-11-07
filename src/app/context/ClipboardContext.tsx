@@ -21,16 +21,17 @@ export function ClipboardContextProvider(props: ClipboardContextProviderProps) {
   const [content, setContent] = useState("")
   const [selected, setSelected] = useState<number | null>(null)
 
-  useEffect(() => {
-    navigator.clipboard
-      .readText()
-      .then((text) => {
-        setContent(text)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [])
+  // Getting user clipboard content on page load
+  // useEffect(() => {
+  //   navigator.clipboard
+  //     .readText()
+  //     .then((text) => {
+  //       setContent(text)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }, [])
 
   return (
     <ClipboardContext.Provider

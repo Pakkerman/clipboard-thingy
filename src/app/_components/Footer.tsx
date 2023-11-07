@@ -4,8 +4,8 @@ import { AiOutlineGithub } from "react-icons/ai"
 
 export default function Footer() {
   return (
-    <footer className="absolute bottom-0 left-0 flex w-[98vw] items-center justify-end gap-2 p-2 text-xs text-gray-600">
-      {/* <p className="">A project by Pakerman</p> */}
+    <footer className="absolute bottom-0 left-0 flex w-[98vw] items-center justify-center gap-2 p-2 text-xs text-gray-600 md:fixed md:justify-end">
+      <p className="">A project by Pakerman</p>
       <Link
         href="https://github.com/Pakkerman/clipboard-thingy"
         target="_blank"

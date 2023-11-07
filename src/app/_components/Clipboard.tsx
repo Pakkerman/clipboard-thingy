@@ -18,17 +18,15 @@ export default function Clipboard() {
   // }, [])
 
   return (
-    <section className="w-[332px] rounded-xl shadow-inner shadow-black/30 bg-slate-200/20">
+    <section className="w-[332px] rounded-xl bg-slate-200/20 shadow-inner shadow-black/30">
       {/* <p>current {window.location.href}</p> */}
-      <div className="rounded-xl border-orange-400 py-2">
-        <ul
-          ref={animationParent}
-          className="flex flex-col gap-2 h-[500px] overflow-y-scroll px-4 py-2"
-        >
-          {tab === "text" && <TextList />}
-          {tab === "file" && <FileList />}
-        </ul>
-      </div>
+      <ul
+        ref={animationParent}
+        className="flex h-[500px] flex-col gap-2 overflow-y-scroll rounded-xl border-orange-400 p-4"
+      >
+        {tab === "text" && <TextList />}
+        {tab === "file" && <FileList />}
+      </ul>
     </section>
   )
 }
