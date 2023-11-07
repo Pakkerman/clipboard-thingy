@@ -17,7 +17,7 @@ export function FileThumbnail(props: FileThumbnailProps) {
             event.stopPropagation()
             setShow(false)
           }}
-          className={`fixed z-10 top-0 transition left-0 bg-black/40 h-[100vh] w-[100vw] flex flex-col justify-center items-center ${
+          className={`fixed left-0 top-0 z-10 flex h-[100vh] w-[100vw] flex-col items-center justify-center bg-black/40 transition ${
             show ? "block" : "hidden"
           }`}
         >
@@ -29,12 +29,12 @@ export function FileThumbnail(props: FileThumbnailProps) {
             height={300}
             onLoad={() => console.log("loading", props.url)}
           />
-          <div className="flex gap-2 w-[200px] justify-between"></div>
+          <div className="flex w-[200px] justify-between gap-2"></div>
         </div>
       )}
       {isImage ? (
         <Image
-          className="border rounded-lg w-[72px] h-[72px] object-cover"
+          className="h-[72px] w-[72px] rounded-lg border object-cover"
           width={72}
           height={72}
           src={props.url && isImage ? props.url : "/images/file_icon.png"}
@@ -43,7 +43,7 @@ export function FileThumbnail(props: FileThumbnailProps) {
       ) : (
         <HiOutlineDocumentText
           size={72}
-          className="text-slate-600 border rounded-lg"
+          className="rounded-lg border text-slate-600"
         />
       )}
     </div>

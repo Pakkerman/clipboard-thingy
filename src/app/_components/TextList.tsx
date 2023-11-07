@@ -6,10 +6,12 @@ import { api } from "~/trpc/react"
 import { useClipboardContext } from "../context/ClipboardContext"
 import { IoCloseOutline } from "react-icons/io5"
 import { HiExternalLink } from "react-icons/hi"
+import { useBoard } from "../hooks/useBoard"
 
 export function TextList() {
   const { setContent, selected, setSelected } = useClipboardContext()
-  const { data } = api.text.getAll.useQuery()
+  const boardId = useBoard()
+  const { data } = api.text.getAll.useQuery({ boardId })
 
   async function handleCopy(id: number, content: string) {
     await navigator.clipboard.writeText(content!)
@@ -42,7 +44,7 @@ export function TextList() {
           onClick={() => handleCopy(item.id, item.content || "")}
         >
           <p className="break-all">{item.content}</p>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-2">
             <DeleteButton id={item.id} />
             <LinkButton url={item.content} />
           </div>
@@ -52,12 +54,14 @@ export function TextList() {
   )
 }
 
-function LinkButton({ url }: any) {
-  if (!url.startsWith("http")) return <></>
+type LinkButtonProps = { url: string | null }
+function LinkButton({ url }: LinkButtonProps) {
+  if (!url) return
+  if (!url.startsWith("http")) return
 
   return (
     <button
-      className="h-6 w-6 rounded-lg border "
+      className="h-6 w-6 rounded-lg border hover:border-black/60"
       onClick={(event) => {
         event.stopPropagation()
         window.open(url, "_blank")
@@ -80,7 +84,7 @@ function DeleteButton({ id }: DeleteButtonProps) {
 
   return (
     <button
-      className="h-6 w-6 rounded-lg border"
+      className="h-6 w-6 rounded-lg border hover:border-black/60"
       onClick={(event) => {
         event.stopPropagation()
         mutate({ id })

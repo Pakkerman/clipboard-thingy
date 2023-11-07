@@ -1,27 +1,53 @@
 "use client"
 
 import { useAutoAnimate } from "@formkit/auto-animate/react"
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import toast from "react-hot-toast"
 import { api } from "~/trpc/react"
 import { MdCancel, MdCheckCircle } from "react-icons/md"
+import { useNavContext } from "~/app/context/NavContext"
+import { useBoard } from "~/app/hooks/useBoard"
 
 export default function ClearAllButton() {
   const utils = api.useUtils()
+  const { tab } = useNavContext()
   const [pending, setPending] = useState(false)
+  const boardId = useBoard()
   const [animationParent] = useAutoAnimate()
-  const { mutate } = api.text.deleteAll.useMutation({
+
+  const { mutate: deleteAllText } = api.text.deleteAll.useMutation({
     onSuccess: () => {
       utils.text.getAll.invalidate()
-      toast.success("Clear all!")
+      toast.success("Cleared all texts!", { id: "clear all" })
       setPending(false)
     },
+    onMutate: () => {
+      toast.loading("deleting all", { id: "clear all" })
+    },
   })
+
+  const { mutate: deleteAllFile } = api.file.deleteAll.useMutation({
+    onSuccess: () => {
+      utils.file.getAll.invalidate()
+      toast.success("Cleared all files!", { id: "clear all" })
+      setPending(false)
+    },
+    onMutate: () => {
+      toast.loading("deleting all", { id: "clear all" })
+    },
+  })
+
+  useEffect(() => {
+    setPending(false)
+  }, [tab])
+
+  const mutate = tab === "text" ? deleteAllText : deleteAllFile
+
   return (
     <div ref={animationParent} className="flex w-full justify-center gap-2 p-4">
       {!pending && (
         <button
-          className="grow rounded-xl border border-red-500 p-2 transition hover:bg-red-500 active:translate-y-[2px]"
+          className="grow rounded-xl border border-red-500 p-2 transition hover:bg-red-500 active:translate-y-[2px] disabled:opacity-50"
           onClick={() => setPending(true)}
         >
           Clear All
@@ -37,7 +63,7 @@ export default function ClearAllButton() {
           </button>
           <button
             className="flex grow items-center justify-center gap-1 rounded-xl border border-red-500 p-2 transition hover:bg-red-500 active:translate-y-[2px]"
-            onClick={() => mutate()}
+            onClick={() => mutate({ boardId })}
           >
             Confirm <MdCheckCircle size={20} />
           </button>

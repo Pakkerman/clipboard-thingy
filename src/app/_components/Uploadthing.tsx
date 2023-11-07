@@ -6,12 +6,14 @@ import React from "react"
 import toast from "react-hot-toast"
 import { api } from "~/trpc/react"
 import { useNavContext } from "../context/NavContext"
+import { useBoard } from "../hooks/useBoard"
 
 export const { UploadButton, UploadDropzone, Uploader } =
   generateComponents<OurFileRouter>()
 
 export default function uploadthing() {
   const utils = api.useUtils()
+  const boardId = useBoard()
   const { setTab } = useNavContext()
   const { mutate } = api.file.createRecord.useMutation({
     onSuccess: async () => {
@@ -32,7 +34,7 @@ export default function uploadthing() {
         if (!res) return
         for (const item of res) {
           const { name, url, size, key } = item
-          mutate({ name, url, size, key })
+          mutate({ boardId, name, url, size, key })
         }
       }}
       onUploadError={(error: Error) => {

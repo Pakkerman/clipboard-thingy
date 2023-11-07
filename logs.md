@@ -52,5 +52,12 @@ Get delete all working.
 - Change text create input to textarea, and make it auto resize based on the scroll height
 - Add auto scrolling to improve UX
 - Change CreateItem layout and behaivors
-- [ ] TODO: Footer
-  - [ ] Add personal site
+- [x] TODO: Footer
+
+### 1107
+- Update ClearAllBotton
+- [ ] TODO: BoardManager, allow user to change different instance of clipboard
+- Change: When user first visit the app, the first page is now a page with "start a new board" button that will sent user to different instance of the board, and user can use this instance to share stuff across devices. This method is not secured intentionally, if you have to log in with some auth or use password and username, on every device... too much trouble. Just have a id which is a string of number as the identifier of the instance is good enough. 
+- [ ] TODO: Use localstrage to store recently visited boards
+- UPDATE: text routes to work with boardId
+- UPDATE: file routes to work with boardId

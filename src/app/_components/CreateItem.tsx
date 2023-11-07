@@ -7,6 +7,7 @@ import { useNavContext } from "../context/NavContext"
 import Uploadthing from "./Uploadthing"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import ClearAllButton from "./buttons/ClearAllButton"
+import { useBoard } from "../hooks/useBoard"
 
 export default function CreatItem() {
   const { content } = useClipboardContext()
@@ -15,6 +16,7 @@ export default function CreatItem() {
   const [text, setText] = useState("")
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const [animationParent] = useAutoAnimate()
+  const boardId = useBoard()
 
   const { mutate, isLoading } = api.text.create.useMutation({
     onSettled: () => {
@@ -35,7 +37,7 @@ export default function CreatItem() {
           <form
             onSubmit={(e) => {
               e.preventDefault()
-              mutate({ content: text })
+              mutate({ text, boardId })
             }}
             className="flex flex-col gap-4 px-4"
           >
@@ -62,10 +64,10 @@ export default function CreatItem() {
               {isLoading ? "Pasting..." : "Paste"}
             </button>
           </form>
-          <ClearAllButton />
         </>
       )}
       {tab === "file" && <Uploadthing />}
+      <ClearAllButton />
     </section>
   )
 }

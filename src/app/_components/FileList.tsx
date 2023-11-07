@@ -5,30 +5,41 @@ import { api } from "~/trpc/react"
 
 import { HiOutlineDocumentText, HiOutlinePhotograph } from "react-icons/hi"
 import { FiDownload } from "react-icons/fi"
-import { IoCloseOutline } from "react-icons/io5"
+import { FiTrash2 } from "react-icons/fi"
 
 import { FileThumbnail } from "./FileThumbnail"
 import { isImageFile } from "~/lib/helpers"
+import { useBoard } from "../hooks/useBoard"
 
 export function FileList() {
   const utils = api.useUtils()
-  const { data: fileData } = api.file.getAll.useQuery()
-  const { mutate: deleteFile } = api.file.deleteRecord.useMutation({
+  const boardId = useBoard()
+  const { data } = api.file.getAll.useQuery({ boardId })
+  const { mutate } = api.file.deleteRecord.useMutation({
     onSuccess: () => {
       void utils.file.getAll.invalidate()
-      toast.success("file deleted")
+      toast.success("Deleted", { id: "file deleted" })
     },
     onMutate: async (input) => {
       const { id } = input
       const prev = utils.file.getAll.getData()?.filter((item) => item.id !== id)
-      utils.file.getAll.setData(undefined, prev)
+      utils.file.getAll.setData({ boardId }, prev) // smt weird with first param
       return prev
     },
   })
 
+  if (data && data.length === 0)
+    return (
+      <div className="flex h-full flex-col justify-center">
+        <h1 className="text-center font-chakraPetch text-slate-900/30">
+          so empty...
+        </h1>
+      </div>
+    )
+
   return (
     <>
-      {fileData?.map((item) => (
+      {data?.map((item) => (
         <li
           key={item.id}
           className="flex min-h-[90px] w-[300px]  cursor-pointer items-center justify-center  gap-2 rounded-xl border shadow-black/20 transition hover:shadow-md active:shadow-inner"
@@ -50,7 +61,7 @@ export function FileList() {
             <div className="flex w-[200px] justify-between gap-2">
               <DownloadButton url={item.url} />
               <DeleteButton
-                handleClick={() => deleteFile({ id: item.id, key: item.key })}
+                handleClick={() => mutate({ id: item.id, key: item.key })}
               />
             </div>
           </div>
@@ -67,11 +78,11 @@ export function DeleteButton(props: DeleteButtonProps) {
 
   return (
     <button
-      className="flex h-6 grow items-center justify-center gap-1 rounded-lg border pl-1 hover:border-black"
+      className="flex h-6 grow items-center justify-center gap-1 rounded-lg border pl-1 pt-[1px] hover:border-black/60"
       onClick={handleClick}
     >
       <span className="text-sm">Delete</span>
-      <IoCloseOutline size={20} />
+      <FiTrash2 size={14} />
     </button>
   )
 }
@@ -80,7 +91,7 @@ type DownloadFileButtonProps = { url: string }
 export function DownloadButton(props: DownloadFileButtonProps) {
   return (
     <button
-      className="flex h-6 grow items-center justify-center gap-1 rounded-lg border"
+      className="flex h-6 grow items-center justify-center gap-1 rounded-lg border pt-[1px] hover:border-black/60"
       onClick={() => {
         toast.loading("Getting file...", { id: "fetching file" })
         fetch(props.url, {

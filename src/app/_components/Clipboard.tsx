@@ -22,7 +22,7 @@ export default function Clipboard() {
       {/* <p>current {window.location.href}</p> */}
       <ul
         ref={animationParent}
-        className="flex h-[500px] flex-col gap-2 overflow-y-scroll rounded-xl border-orange-400 p-4"
+        className="flex h-[450px] flex-col gap-2 overflow-y-scroll rounded-xl border-orange-400 p-4"
       >
         {tab === "text" && <TextList />}
         {tab === "file" && <FileList />}
