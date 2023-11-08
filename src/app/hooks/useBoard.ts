@@ -21,5 +21,5 @@ export function useBoard() {
 function generateRandomTable(): string {
   return Math.floor(Math.random() * 9999)
     .toString()
-    .padStart(5, "0")
+    .padStart(6, "0")
 }

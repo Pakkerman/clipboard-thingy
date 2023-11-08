@@ -6,11 +6,12 @@ import { api } from "~/trpc/react"
 import { useClipboardContext } from "../context/ClipboardContext"
 import { IoCloseOutline } from "react-icons/io5"
 import { HiExternalLink } from "react-icons/hi"
-import { useBoard } from "../hooks/useBoard"
+import { useParams } from "next/navigation"
 
 export function TextList() {
   const { setContent, selected, setSelected } = useClipboardContext()
-  const boardId = useBoard()
+  const { id } = useParams()
+  const boardId = id!.toString().padStart(6, "0")
   const { data } = api.text.getAll.useQuery({ boardId })
 
   async function handleCopy(id: number, content: string) {
@@ -36,7 +37,7 @@ export function TextList() {
       {data?.map((item) => (
         <li
           key={item.id}
-          className={`flex min-h-min w-[300px] cursor-pointer items-center justify-between gap-2 rounded-xl border p-4 shadow-black/20 transition hover:shadow-md active:shadow-inner ${
+          className={`flex min-h-min w-full cursor-pointer items-center justify-between gap-2 rounded-xl border p-4 shadow-black/20 transition hover:shadow-md active:shadow-inner ${
             selected === item.id
               ? "shadow-inner hover:shadow-inner"
               : "shadow-none"

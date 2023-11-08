@@ -1,7 +1,7 @@
 "use client"
 
 import { useAutoAnimate } from "@formkit/auto-animate/react"
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useState } from "react"
 import toast from "react-hot-toast"
 import { api } from "~/trpc/react"
 import { MdCancel, MdCheckCircle } from "react-icons/md"
@@ -47,7 +47,7 @@ export default function ClearAllButton() {
     <div ref={animationParent} className="flex w-full justify-center gap-2 p-4">
       {!pending && (
         <button
-          className="grow rounded-xl border border-red-500 p-2 transition hover:bg-red-500 active:translate-y-[2px] disabled:opacity-50"
+          className="grow select-none rounded-xl border border-red-500 p-2 transition hover:bg-red-500 active:translate-y-[2px] disabled:opacity-50"
           onClick={() => setPending(true)}
         >
           Clear All
@@ -56,7 +56,7 @@ export default function ClearAllButton() {
       {pending && (
         <>
           <button
-            className="flex grow items-center justify-center gap-1 rounded-xl border border-blue-500 p-2 transition hover:bg-blue-500 active:translate-y-[2px]"
+            className="flex grow select-none items-center justify-center gap-1 rounded-xl border border-blue-500 p-2 transition hover:bg-blue-500 active:translate-y-[2px]"
             onClick={() => setPending(false)}
           >
             Cancel <MdCancel size={20} />
@@ -65,7 +65,7 @@ export default function ClearAllButton() {
             className="flex grow items-center justify-center gap-1 rounded-xl border border-red-500 p-2 transition hover:bg-red-500 active:translate-y-[2px]"
             onClick={() => mutate({ boardId })}
           >
-            Confirm <MdCheckCircle size={20} />
+            Delete <MdCheckCircle size={20} />
           </button>
         </>
       )}

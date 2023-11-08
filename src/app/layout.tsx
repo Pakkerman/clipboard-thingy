@@ -7,7 +7,6 @@ import { headers } from "next/headers"
 import { TRPCReactProvider } from "~/trpc/react"
 import { ClipboardContextProvider } from "./context/ClipboardContext"
 import { NavContextProvider } from "./context/NavContext"
-import { BoardContextProvider } from "./context/BoardContext"
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -37,15 +36,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans ${roboto.variable} ${chakraPetch.variable}`}>
         <Toaster />
-        <BoardContextProvider>
-          <NavContextProvider>
-            <ClipboardContextProvider>
-              <TRPCReactProvider headers={headers()}>
-                {children}
-              </TRPCReactProvider>
-            </ClipboardContextProvider>
-          </NavContextProvider>
-        </BoardContextProvider>
+        <NavContextProvider>
+          <ClipboardContextProvider>
+            <TRPCReactProvider headers={headers()}>
+              {children}
+            </TRPCReactProvider>
+          </ClipboardContextProvider>
+        </NavContextProvider>
       </body>
     </html>
   )

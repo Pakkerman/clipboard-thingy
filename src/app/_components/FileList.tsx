@@ -9,11 +9,13 @@ import { FiTrash2 } from "react-icons/fi"
 
 import { FileThumbnail } from "./FileThumbnail"
 import { isImageFile } from "~/lib/helpers"
-import { useBoard } from "../hooks/useBoard"
+import { useParams } from "next/navigation"
 
 export function FileList() {
   const utils = api.useUtils()
-  const boardId = useBoard()
+  const { id } = useParams()
+  const boardId = id!.toString().padStart(6, "0")
+
   const { data } = api.file.getAll.useQuery({ boardId })
   const { mutate } = api.file.deleteRecord.useMutation({
     onSuccess: () => {
@@ -42,12 +44,12 @@ export function FileList() {
       {data?.map((item) => (
         <li
           key={item.id}
-          className="flex min-h-[90px] w-[300px]  cursor-pointer items-center justify-center  gap-2 rounded-xl border shadow-black/20 transition hover:shadow-md active:shadow-inner"
+          className="flex min-h-[90px] w-full cursor-pointer items-center justify-center  gap-2 rounded-xl border p-4 shadow-black/20 transition hover:shadow-md active:shadow-inner"
         >
-          <div className="flex flex-col gap-2">
-            <div className="flex h-8 items-center rounded-lg border">
-              <p className="line-clamp-1 w-[150px] pl-2">{item.name}</p>
-              <div className="flex w-[50px] pr-1">
+          <div className="flex grow flex-col gap-2">
+            <div className="flex h-8 items-center justify-between rounded-lg border">
+              <p className="line-clamp-1  pl-2">{item.name}</p>
+              <div className="flex pr-1">
                 <p className="text-sm uppercase">
                   {item.name.split(".").at(-1)}
                 </p>
@@ -58,7 +60,7 @@ export function FileList() {
                 )}
               </div>
             </div>
-            <div className="flex w-[200px] justify-between gap-2">
+            <div className="flex grow justify-between gap-2">
               <DownloadButton url={item.url} />
               <DeleteButton
                 handleClick={() => mutate({ id: item.id, key: item.key })}
@@ -81,7 +83,7 @@ export function DeleteButton(props: DeleteButtonProps) {
       className="flex h-6 grow items-center justify-center gap-1 rounded-lg border pl-1 pt-[1px] hover:border-black/60"
       onClick={handleClick}
     >
-      <span className="text-sm">Delete</span>
+      <span className="text-sm ">Delete</span>
       <FiTrash2 size={14} />
     </button>
   )

@@ -58,7 +58,7 @@ export default function CreatItem() {
             />
             <button
               type="submit"
-              className="rounded-lg border-[0.5px] border-slate-900/20 bg-orange-500/70 px-10 py-3 font-semibold text-gray-800 drop-shadow-md transition hover:bg-orange-300 "
+              className="select-none rounded-xl border border-black/20 border-orange-400 bg-orange-400 p-2 text-lg text-orange-950 shadow-md shadow-orange-950/40  transition hover:shadow-inner hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950"
               disabled={isLoading || text.length === 0}
             >
               {isLoading ? "Pasting..." : "Paste"}

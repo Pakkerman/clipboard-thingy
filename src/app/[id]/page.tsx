@@ -10,6 +10,7 @@ import Nav from "../_components/Nav"
 
 export default function Page() {
   const { id } = useParams()
+
   // const { setBoardId } = useBoardContext()
 
   // useEffect(() => {
