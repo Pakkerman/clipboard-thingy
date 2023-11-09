@@ -6,13 +6,13 @@ import toast from "react-hot-toast"
 import { api } from "~/trpc/react"
 import { MdCancel, MdCheckCircle } from "react-icons/md"
 import { useNavContext } from "~/app/context/NavContext"
-import { useBoard } from "~/app/hooks/useBoard"
+import { useBoardId } from "~/app/hooks/useBoardId"
 
 export default function ClearAllButton() {
   const utils = api.useUtils()
   const { tab } = useNavContext()
   const [pending, setPending] = useState(false)
-  const boardId = useBoard()
+  const boardId = useBoardId()
   const [animationParent] = useAutoAnimate()
 
   const { mutate: deleteAllText } = api.text.deleteAll.useMutation({
@@ -33,7 +33,7 @@ export default function ClearAllButton() {
       setPending(false)
     },
     onMutate: () => {
-      toast.loading("deleting all", { id: "clear all" })
+      toast.loading("Deleting all", { id: "clear all" })
     },
   })
 

@@ -4,14 +4,14 @@ import toast from "react-hot-toast"
 import { api } from "~/trpc/react"
 
 import { useClipboardContext } from "../context/ClipboardContext"
+import { useBoardId } from "../hooks/useBoardId"
+
 import { IoCloseOutline } from "react-icons/io5"
 import { HiExternalLink } from "react-icons/hi"
-import { useParams } from "next/navigation"
 
 export function TextList() {
   const { setContent, selected, setSelected } = useClipboardContext()
-  const { id } = useParams()
-  const boardId = id!.toString().padStart(6, "0")
+  const boardId = useBoardId()
   const { data } = api.text.getAll.useQuery({ boardId })
 
   async function handleCopy(id: number, content: string) {

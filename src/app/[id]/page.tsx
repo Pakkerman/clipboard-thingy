@@ -1,23 +1,19 @@
 "use client"
 
+import React from "react"
 import Link from "next/link"
-import { useParams, usePathname } from "next/navigation"
-import React, { useEffect } from "react"
+import { useParams } from "next/navigation"
+
 import Clipboard from "~/app/_components/Clipboard"
 import CreateItem from "../_components/CreateItem"
 import Footer from "../_components/Footer"
 import Nav from "../_components/Nav"
-import { FiCopy, FiHome } from "react-icons/fi"
+
 import toast from "react-hot-toast"
+import { FiCopy, FiHome } from "react-icons/fi"
 
 export default function Page() {
   const { id } = useParams()
-
-  // const { setBoardId } = useBoardContext()
-
-  // useEffect(() => {
-  //   setBoardId(id)
-  // }, [id])
 
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-orange-50/50 to-gray-50 pb-20 pt-5 font-chakraPetch text-slate-900">

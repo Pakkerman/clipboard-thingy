@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import Image from "next/image"
 
 import { HiOutlineDocumentText } from "react-icons/hi"
-import { isImageFile } from "~/lib/helpers"
+import { isImageFile } from "~/app/lib/helpers"
 
 type FileThumbnailProps = { url: string | null }
 export function FileThumbnail(props: FileThumbnailProps) {

@@ -56,9 +56,9 @@ Get delete all working.
 
 ### 1107
 - Update ClearAllBotton
-- [ ] TODO: BoardManager, allow user to change different instance of clipboard
+- [X] TODO: BoardManager, allow user to change different instance of clipboard
 - Change: When user first visit the app, the first page is now a page with "start a new board" button that will sent user to different instance of the board, and user can use this instance to share stuff across devices. This method is not secured intentionally, if you have to log in with some auth or use password and username, on every device... too much trouble. Just have a id which is a string of number as the identifier of the instance is good enough. 
-- [ ] TODO: Use localstrage to store recently visited boards
+- [X] TODO: Use localstrage to store recently visited boards
 - UPDATE: text routes to work with boardId
 - UPDATE: file routes to work with boardId
 
@@ -66,3 +66,4 @@ Get delete all working.
 - LAYOUT: Fix buttons hover behaivor, change focus-within selection outline style
 - UPDATE: Instructions section, added buttons for copy url with board id 
 - Simplify frontpage buttons to only have a start button and id input
+- FIX: Issue with loading board id from localstrage before the BoardManager is renders, move getting from localstorage into useEffect and loading to board id input

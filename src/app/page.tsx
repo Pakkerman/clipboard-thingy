@@ -1,4 +1,5 @@
 import React from "react"
+
 import BoardManager from "./_components/BoardManager"
 import Footer from "./_components/Footer"
 

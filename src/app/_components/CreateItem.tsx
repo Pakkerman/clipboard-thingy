@@ -2,21 +2,23 @@
 
 import React, { useRef, useState } from "react"
 import { api } from "~/trpc/react"
+
 import { useClipboardContext } from "../context/ClipboardContext"
 import { useNavContext } from "../context/NavContext"
+import { useBoardId } from "../hooks/useBoardId"
 import Uploadthing from "./Uploadthing"
-import { useAutoAnimate } from "@formkit/auto-animate/react"
 import ClearAllButton from "./buttons/ClearAllButton"
-import { useBoard } from "../hooks/useBoard"
+
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 
 export default function CreatItem() {
-  const { content } = useClipboardContext()
+  // const { content } = useClipboardContext()
   const { tab, setTab } = useNavContext()
   const utils = api.useUtils()
+  const boardId = useBoardId()
   const [text, setText] = useState("")
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const [animationParent] = useAutoAnimate()
-  const boardId = useBoard()
 
   const { mutate, isLoading } = api.text.create.useMutation({
     onSettled: () => {
@@ -24,6 +26,8 @@ export default function CreatItem() {
       setText("")
       setTab("text")
       window.scrollTo({ behavior: "smooth", top: 0 })
+      // reset text area rows
+      if (textareaRef.current) textareaRef.current.rows = 2
     },
   })
 
@@ -51,14 +55,18 @@ export default function CreatItem() {
               placeholder="Type Something"
               value={text}
               cols={30}
-              rows={1 + (textareaRef.current?.scrollHeight! - 40) / 24}
+              rows={
+                textareaRef.current?.scrollHeight
+                  ? 1 + (textareaRef.current?.scrollHeight! - 40) / 24
+                  : 2
+              }
               onFocus={() =>
                 textareaRef.current?.scrollIntoView({ behavior: "smooth" })
               }
             />
             <button
               type="submit"
-              className="select-none rounded-xl border-[0.5px] border-orange-400 border-slate-900/20 bg-orange-400 p-2 text-lg text-orange-950 shadow-md shadow-orange-950/30  transition hover:bg-orange-300 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950"
+              className="select-none rounded-xl border-[0.5px] border-orange-400 border-slate-900/20 bg-orange-400 p-2 text-lg text-orange-950 shadow-md shadow-orange-950/30  transition hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950"
               disabled={isLoading || text.length === 0}
             >
               {isLoading ? "Pasting..." : "Paste"}

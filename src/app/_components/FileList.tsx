@@ -3,18 +3,17 @@ import toast from "react-hot-toast"
 
 import { api } from "~/trpc/react"
 
+import { FileThumbnail } from "./FileThumbnail"
+import { isImageFile } from "~/app/lib/helpers"
+import { useBoardId } from "../hooks/useBoardId"
+
 import { HiOutlineDocumentText, HiOutlinePhotograph } from "react-icons/hi"
 import { FiDownload } from "react-icons/fi"
 import { FiTrash2 } from "react-icons/fi"
 
-import { FileThumbnail } from "./FileThumbnail"
-import { isImageFile } from "~/lib/helpers"
-import { useParams } from "next/navigation"
-
 export function FileList() {
   const utils = api.useUtils()
-  const { id } = useParams()
-  const boardId = id!.toString().padStart(6, "0")
+  const boardId = useBoardId()
 
   const { data } = api.file.getAll.useQuery({ boardId })
   const { mutate } = api.file.deleteRecord.useMutation({
