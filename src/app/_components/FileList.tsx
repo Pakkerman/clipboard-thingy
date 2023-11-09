@@ -44,11 +44,11 @@ export function FileList() {
       {data?.map((item) => (
         <li
           key={item.id}
-          className="flex min-h-[90px] w-full cursor-pointer items-center justify-center  gap-2 rounded-xl border p-4 shadow-black/20 transition hover:shadow-md active:shadow-inner"
+          className="flex min-h-[90px] w-full cursor-pointer items-center justify-center gap-2 rounded-xl border p-4 shadow-black/20 transition hover:shadow-md active:shadow-inner"
         >
           <div className="flex grow flex-col gap-2">
             <div className="flex h-8 items-center justify-between rounded-lg border">
-              <p className="line-clamp-1  pl-2">{item.name}</p>
+              <p className="w-10 grow truncate pl-2">{item.name}</p>
               <div className="flex pr-1">
                 <p className="text-sm uppercase">
                   {item.name.split(".").at(-1)}

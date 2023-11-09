@@ -18,10 +18,7 @@ export default function Page() {
   // }, [id])
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-orange-50/50 to-gray-50 pb-20 font-chakraPetch text-slate-900">
-      <h1 className="py-4 font-chakraPetch text-5xl italic tracking-wider">
-        Clipbroker
-      </h1>
+    <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-orange-50/50 to-gray-50 pb-20 pt-5 font-chakraPetch text-slate-900">
       <Clipboard />
       <Nav />
       <CreateItem />

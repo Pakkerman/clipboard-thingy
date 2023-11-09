@@ -33,13 +33,15 @@ export function FileThumbnail(props: FileThumbnailProps) {
         </div>
       )}
       {isImage ? (
-        <Image
-          className="h-[72px] w-[72px] rounded-lg border object-cover"
-          width={72}
-          height={72}
-          src={props.url && isImage ? props.url : "/images/file_icon.png"}
-          alt="file thumbnail"
-        />
+        <div className="h-[72px] w-[72px] ">
+          <Image
+            className="h-full w-full rounded-lg border  object-cover "
+            width={72}
+            height={72}
+            src={props.url && isImage ? props.url : "/images/file_icon.png"}
+            alt="file thumbnail"
+          />
+        </div>
       ) : (
         <HiOutlineDocumentText
           size={72}
