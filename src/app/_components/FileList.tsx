@@ -51,6 +51,7 @@ export function FileList() {
               <p className="w-10 grow truncate pl-2">{item.name}</p>
               <div className="flex pr-1">
                 <p className="text-sm uppercase">
+                  {"| "}
                   {item.name.split(".").at(-1)}
                 </p>
                 {isImageFile(item.name) ? (

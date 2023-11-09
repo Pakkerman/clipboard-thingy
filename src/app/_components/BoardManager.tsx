@@ -22,26 +22,20 @@ export default function BoardManager() {
   return (
     <section className="flex flex-col gap-4 py-6 font-chakraPetch">
       <Link
-        className="rounded-xl border border-black/20 border-orange-400 bg-orange-400 p-2 text-lg text-orange-950 shadow-md shadow-orange-950/40 transition  hover:shadow-inner hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950 "
-        href={"/" + boardId?.padStart(6, "0")}
+        className="rounded-xl border border-black/20 border-orange-400 bg-orange-400 p-2 text-lg text-orange-950 shadow-md shadow-orange-950/40 transition hover:shadow-inner hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950"
+        href={"/" + inputId}
       >
-        <p className="text-center">Start</p>
+        <div className="text-center">Start</div>
       </Link>
       <br />
-      <p className="text-center">or enter id</p>
+      <p className="text-center">Board ID</p>
       <input
         type="text"
-        className="rounded-md text-center"
+        className="rounded-xl bg-orange-50/20 p-2 text-center shadow-inner shadow-orange-950/40"
         value={inputId}
         maxLength={6}
         onChange={(event) => setInputId(event.target.value)}
       />
-      <Link
-        className="rounded-xl border border-black/20 p-2 text-lg transition hover:border-orange-400 hover:bg-orange-400 active:translate-y-[2px] "
-        href={"/" + inputId}
-      >
-        <p className="text-center">Go to board</p>
-      </Link>
     </section>
   )
 }

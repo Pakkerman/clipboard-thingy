@@ -61,3 +61,8 @@ Get delete all working.
 - [ ] TODO: Use localstrage to store recently visited boards
 - UPDATE: text routes to work with boardId
 - UPDATE: file routes to work with boardId
+
+### 1109
+- LAYOUT: Fix buttons hover behaivor, change focus-within selection outline style
+- UPDATE: Instructions section, added buttons for copy url with board id 
+- Simplify frontpage buttons to only have a start button and id input
