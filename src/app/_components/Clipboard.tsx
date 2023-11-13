@@ -27,7 +27,6 @@ export default function Clipboard() {
 
   return (
     <section className="w-[90%] max-w-[375px] rounded-xl bg-slate-200/20 shadow-inner shadow-black/30">
-      {/* <p>current {window.location.href}</p> */}
       <ul
         ref={animationParent}
         className="flex h-[450px] flex-col items-center gap-2 overflow-y-scroll rounded-xl border-orange-400 p-4"

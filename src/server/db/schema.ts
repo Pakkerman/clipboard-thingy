@@ -45,3 +45,15 @@ export const files = mysqlTable("file", {
     .notNull(),
   updatedAt: timestamp("updatedAt").onUpdateNow(),
 })
+
+export const board = mysqlTable("board", {
+  id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+
+  boardId: varchar("boardId", { length: 6 }).notNull(),
+  pin: varchar("pin", { length: 4 }),
+
+  createdAt: timestamp("created_at")
+    .default(sql`CURRENT_TIMESTAMP`)
+    .notNull(),
+  updatedAt: timestamp("updatedAt").onUpdateNow(),
+})

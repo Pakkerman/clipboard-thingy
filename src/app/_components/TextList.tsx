@@ -12,7 +12,7 @@ import { HiExternalLink } from "react-icons/hi"
 export function TextList() {
   const { setContent, selected, setSelected } = useClipboardContext()
   const boardId = useBoardId()
-  const { data } = api.text.getAll.useQuery({ boardId })
+  const { data, isLoading } = api.text.getAll.useQuery({ boardId })
 
   async function handleCopy(id: number, content: string) {
     await navigator.clipboard.writeText(content!)
@@ -22,6 +22,15 @@ export function TextList() {
     toast.dismiss("copy success")
     toast.success("coped!", { id: "copy success" })
   }
+
+  if (isLoading)
+    return (
+      <div className="flex h-full flex-col justify-center">
+        <h1 className="text-center font-chakraPetch text-slate-900/30">
+          Loading...
+        </h1>
+      </div>
+    )
 
   if (data && data.length === 0)
     return (

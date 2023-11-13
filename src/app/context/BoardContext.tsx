@@ -33,7 +33,7 @@ export function useBoardContext() {
   const context = useContext(BoardContext)
   if (!context)
     throw new Error(
-      "useBoardContext can only be used inside BoardContext.Provider",
+      "useBoardContext can only be used inside BoardContextProvider",
     )
 
   return context

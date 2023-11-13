@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { api } from "~/trpc/react"
 
 import { useClipboardContext } from "../context/ClipboardContext"
@@ -21,6 +21,9 @@ export default function CreatItem() {
   const [animationParent] = useAutoAnimate()
 
   const { mutate, isLoading } = api.text.create.useMutation({
+    onMutate: () => {
+      if (text.length === 0 && textareaRef.current) textareaRef.current.focus()
+    },
     onSettled: () => {
       utils.text.getAll.invalidate()
       setText("")

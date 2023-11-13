@@ -15,7 +15,7 @@ export function FileList() {
   const utils = api.useUtils()
   const boardId = useBoardId()
 
-  const { data } = api.file.getAll.useQuery({ boardId })
+  const { data, isLoading } = api.file.getAll.useQuery({ boardId })
   const { mutate } = api.file.deleteRecord.useMutation({
     onSuccess: () => {
       void utils.file.getAll.invalidate()
@@ -28,6 +28,15 @@ export function FileList() {
       return prev
     },
   })
+
+  if (isLoading)
+    return (
+      <div className="flex h-full flex-col justify-center">
+        <h1 className="text-center font-chakraPetch text-slate-900/30">
+          Loading...
+        </h1>
+      </div>
+    )
 
   if (data && data.length === 0)
     return (
@@ -50,7 +59,7 @@ export function FileList() {
               <p className="w-10 grow truncate pl-2">{item.name}</p>
               <div className="flex pr-1">
                 <p className="text-sm uppercase">
-                  {"| "}
+                  <span className="text-gray-200">{"| "}</span>
                   {item.name.split(".").at(-1)}
                 </p>
                 {isImageFile(item.name) ? (

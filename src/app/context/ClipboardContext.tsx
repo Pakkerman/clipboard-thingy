@@ -46,7 +46,7 @@ export function useClipboardContext() {
   const context = useContext(ClipboardContext)
   if (!context) {
     throw new Error(
-      "useClipboardContext can only be used inside ClipboardContext.Provider",
+      "useClipboardContext can only be used inside ClipboardContextProvider",
     )
   }
   return context

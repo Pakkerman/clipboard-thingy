@@ -12,5 +12,6 @@ export default withUt({
       },
     },
   },
+  darkMode: "class",
   plugins: [],
 } satisfies Config)

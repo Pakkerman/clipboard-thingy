@@ -22,7 +22,7 @@ export default function ClearAllButton() {
       setPending(false)
     },
     onMutate: () => {
-      toast.loading("deleting all", { id: "clear all" })
+      toast.loading("Deleting all", { id: "clear all" })
     },
   })
 

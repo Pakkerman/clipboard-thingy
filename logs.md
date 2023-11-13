@@ -67,3 +67,19 @@ Get delete all working.
 - UPDATE: Instructions section, added buttons for copy url with board id 
 - Simplify frontpage buttons to only have a start button and id input
 - FIX: Issue with loading board id from localstrage before the BoardManager is renders, move getting from localstorage into useEffect and loading to board id input
+
+### 1110
+- [ ] TODO: Add dark mode
+    - [X] ThemeContext
+
+### 1113
+- After user claim a unused board, present option to set pin, then next time when user want to use this board, a pin must be input and only correct pin will allow user to use the board. Just to make it more secure. 
+  - [ ] Setup a table for keep track of board, probable need several fields, pin 
+  - The board manager will need to query the board tables first to give a random id that is not being used.
+  - This will probably take some time if most of the 100000 of boards are being used, so we might need some way to handle the loading state.
+  - Probably need a way to free the board too. Seems like something that will involve some automated cron job on the server side or database side, that will clean boards table that has pin but not content, or some expiration date. Like after 30 days of not being used, delete board row. Or just do this on collision.
+    - Get random boardId > check if board is used > check if board is outdated > purge board and pin and start new
+                                                  > randomized a new board
+    - Same goes for user inputed boardId > check if used > check if outdated > purge board
+
+  - [ ] Hash pin onto url so that direct url share will not require pin input

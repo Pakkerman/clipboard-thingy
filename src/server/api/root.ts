@@ -1,6 +1,7 @@
 import { createTRPCRouter } from "~/server/api/trpc"
 import { fileRouter } from "./routers/file"
 import { textRouter } from "./routers/text"
+import { boardRouter } from "./routers/board"
 
 /**
  * This is the primary router for your server.
@@ -10,6 +11,7 @@ import { textRouter } from "./routers/text"
 export const appRouter = createTRPCRouter({
   file: fileRouter,
   text: textRouter,
+  board: boardRouter,
 })
 
 // export type definition of API
