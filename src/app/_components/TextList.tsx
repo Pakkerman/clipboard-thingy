@@ -8,6 +8,7 @@ import { useBoardId } from "../hooks/useBoardId"
 
 import { IoCloseOutline } from "react-icons/io5"
 import { HiExternalLink } from "react-icons/hi"
+import { isUrl } from "../lib/helpers"
 
 export function TextList() {
   const { setContent, selected, setSelected } = useClipboardContext()
@@ -67,7 +68,7 @@ export function TextList() {
 type LinkButtonProps = { url: string | null }
 function LinkButton({ url }: LinkButtonProps) {
   if (!url) return
-  if (!url.startsWith("http")) return
+  if (!isUrl(url)) return
 
   return (
     <button
