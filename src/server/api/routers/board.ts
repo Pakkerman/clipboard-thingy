@@ -16,6 +16,14 @@ export const boardRouter = createTRPCRouter({
       })
     }),
 
+  createBoard: publicProcedure
+    .input(z.object({ id: z.string().length(6), pin: z.string().nullable() }))
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db
+        .insert(board)
+        .values({ boardId: input.id, pin: input.pin })
+    }),
+
   updateBoardPin: publicProcedure
     .input(z.object({ id: z.string(), pin: z.string().min(4) }))
     .mutation(({ ctx, input }) => {

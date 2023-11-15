@@ -13,16 +13,29 @@ import toast from "react-hot-toast"
 import { FiCopy, FiHome } from "react-icons/fi"
 import { api } from "~/trpc/react"
 import QRCode from "../_components/QRCode"
+import { useBoardContext } from "../context/BoardContext"
+import { PasscodeInput } from "../_components/PasscodeInput"
 
 export default function Page() {
   const { id } = useParams()
   const { data } = api.board.getBoard.useQuery({ id: id as string })
   const { mutate: updatePin } = api.board.updateBoardPin.useMutation()
   const [showPinInput, setShowPinInput] = useState(false)
-  const [pin, setPin] = useState("")
+  // const [pin, setPin] = useState("")
+
+  const { isLoadingBoard, pin, setPin, locked } = useBoardContext()
+
+  // if (isLoadingBoard) return <>Loading</>
+
+  if (locked)
+    return (
+      <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-orange-50 to-gray-50 pb-20 pt-5 font-chakraPetch text-slate-900 transition ">
+        <PasscodeInput pin={pin} setPin={setPin} />
+      </main>
+    )
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-orange-50 to-gray-50 pb-20 pt-5 font-chakraPetch text-slate-900 transition">
+    <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-orange-50 to-gray-50 pb-20 pt-5 font-chakraPetch text-slate-900 transition ">
       <Clipboard />
       <Nav />
       <CreateItem />
@@ -70,6 +83,7 @@ export default function Page() {
           </button>
         </div>
       </div>
+
       <QRCode />
       <Footer />
     </main>

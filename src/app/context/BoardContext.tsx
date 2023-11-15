@@ -10,33 +10,40 @@ type BoardContext = {
   locked: boolean
   setLocked: React.Dispatch<React.SetStateAction<boolean>>
   boardData: any
-  loadingBoard: boolean
+  isLoadingBoard: boolean
 }
 const BoardContext = createContext<BoardContext | null>(null)
 
 type BoardContextProvider = { children: React.ReactNode }
 export function BoardContextProvider(props: BoardContextProvider) {
+  console.log("you run")
   const [locked, setLocked] = useState(true)
   const [pin, setPin] = useState("")
   const id = useParamId()
-  const { data: boardData, isLoading: loadingBoard } =
+  const { data: boardData, isLoading: isLoadingBoard } =
     api.board.getBoard.useQuery({
       id: id as string,
     })
+  const { mutate: createBoard } = api.board.createBoard.useMutation()
 
   useEffect(() => {
-    if (loadingBoard) return
+    if (isLoadingBoard) return
     if (!boardData) {
       setLocked(false)
-      return
-    } else if (boardData.pin === pin) {
-      setLocked(false)
-    }
-  }, [pin, loadingBoard])
+      createBoard({ id: id as string, pin: null })
+    } else if (boardData.pin === pin || boardData.pin == null) setLocked(false)
+  }, [pin, isLoadingBoard])
 
   return (
     <BoardContext.Provider
-      value={{ locked, setLocked, pin, setPin, boardData, loadingBoard }}
+      value={{
+        locked,
+        setLocked,
+        pin,
+        setPin,
+        boardData,
+        isLoadingBoard,
+      }}
     >
       {props.children}
     </BoardContext.Provider>
