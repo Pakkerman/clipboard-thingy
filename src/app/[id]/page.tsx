@@ -19,11 +19,11 @@ import { PasscodeInput } from "../_components/PasscodeInput"
 export default function Page() {
   const { id } = useParams()
   const { data } = api.board.getBoard.useQuery({ id: id as string })
-  const { mutate: updatePin } = api.board.updateBoardPin.useMutation()
   const [showPinInput, setShowPinInput] = useState(false)
   // const [pin, setPin] = useState("")
 
-  const { isLoadingBoard, pin, setPin, locked } = useBoardContext()
+  const { isLoadingBoard, pin, setPin, locked, handleUpdatePin } =
+    useBoardContext()
 
   // if (isLoadingBoard) return <>Loading</>
 
@@ -46,7 +46,7 @@ export default function Page() {
           className="rounded-md border-[0.5px] border-black/20 px-4 py-2"
           onClick={() => {
             setShowPinInput(!showPinInput)
-            updatePin({ id: id as string, pin })
+            if (showPinInput) handleUpdatePin()
           }}
         >
           {data?.pin ? "Change pin" : "Set pin"}

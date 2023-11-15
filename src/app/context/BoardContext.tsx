@@ -3,6 +3,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { api } from "~/trpc/react"
 import { useParamId } from "../hooks/useParamId"
+import toast from "react-hot-toast"
 
 type BoardContext = {
   pin: string
@@ -11,6 +12,7 @@ type BoardContext = {
   setLocked: React.Dispatch<React.SetStateAction<boolean>>
   boardData: any
   isLoadingBoard: boolean
+  handleUpdatePin: () => void
 }
 const BoardContext = createContext<BoardContext | null>(null)
 
@@ -24,6 +26,16 @@ export function BoardContextProvider(props: BoardContextProvider) {
       id: id as string,
     })
   const { mutate: createBoard } = api.board.createBoard.useMutation()
+  const { mutate: updateBoardPin } = api.board.updateBoardPin.useMutation({
+    onSuccess: () => {
+      toast.success("Pin updated!", { id: "pin" })
+    },
+  })
+
+  function handleUpdatePin(): void {
+    toast.loading("Updating pin", { id: "pin" })
+    updateBoardPin({ id, pin })
+  }
 
   useEffect(() => {
     if (isLoadingBoard) return
@@ -42,6 +54,7 @@ export function BoardContextProvider(props: BoardContextProvider) {
         setPin,
         boardData,
         isLoadingBoard,
+        handleUpdatePin,
       }}
     >
       {props.children}
