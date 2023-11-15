@@ -40,7 +40,7 @@ export function FileThumbnail(props: FileThumbnailProps) {
             height={72}
             src={props.url && isImage ? props.url : "/images/file_icon.png"}
             alt="file thumbnail"
-            placeholder={`data:image/${"/images/file_icon.png"}`}
+            placeholder={`data:image${"/images/file_icon.png"}`}
           />
         </div>
       ) : (
