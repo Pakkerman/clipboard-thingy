@@ -27,9 +27,7 @@ export function BoardContextProvider(props: BoardContextProvider) {
     })
   const { mutate: createBoard } = api.board.createBoard.useMutation()
   const { mutate: updateBoardPin } = api.board.updateBoardPin.useMutation({
-    onSuccess: () => {
-      toast.success("Pin updated!", { id: "pin" })
-    },
+    onSuccess: () => toast.success("Pin updated!", { id: "pin" }),
   })
 
   function handleUpdatePin(): void {

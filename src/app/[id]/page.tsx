@@ -20,12 +20,8 @@ export default function Page() {
   const { id } = useParams()
   const { data } = api.board.getBoard.useQuery({ id: id as string })
   const [showPinInput, setShowPinInput] = useState(false)
-  // const [pin, setPin] = useState("")
-
   const { isLoadingBoard, pin, setPin, locked, handleUpdatePin } =
     useBoardContext()
-
-  // if (isLoadingBoard) return <>Loading</>
 
   if (locked)
     return (
