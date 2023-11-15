@@ -18,9 +18,8 @@ import { PasscodeInput } from "../_components/PasscodeInput"
 
 export default function Page() {
   const { id } = useParams()
-  const { data } = api.board.getBoard.useQuery({ id: id as string })
   const [showPinInput, setShowPinInput] = useState(false)
-  const { isLoadingBoard, pin, setPin, locked, handleUpdatePin } =
+  const { boardData, isLoadingBoard, pin, setPin, locked, handleUpdatePin } =
     useBoardContext()
 
   if (locked)
@@ -37,7 +36,7 @@ export default function Page() {
       <CreateItem />
       <div className="flex w-[332px] flex-col  items-center justify-center gap-2 py-4 text-center text-sm text-gray-600">
         <p>This is board #{id}</p>
-        {!data?.pin && <p>Set pin to claim this board</p>}
+        {!boardData?.pin && <p>Set pin to claim this board</p>}
         <button
           className="rounded-md border-[0.5px] border-black/20 px-4 py-2"
           onClick={() => {
@@ -45,7 +44,7 @@ export default function Page() {
             if (showPinInput) handleUpdatePin()
           }}
         >
-          {data?.pin ? "Change pin" : "Set pin"}
+          {boardData?.pin ? "Change pin" : "Set pin"}
         </button>
         {showPinInput && (
           <input
@@ -53,7 +52,7 @@ export default function Page() {
             value={pin}
             minLength={4}
             maxLength={4}
-            placeholder={data?.pin ? data.pin : "0000"}
+            placeholder={boardData?.pin ? boardData.pin : "____"}
             onChange={(event) => setPin(event.target.value)}
           />
         )}

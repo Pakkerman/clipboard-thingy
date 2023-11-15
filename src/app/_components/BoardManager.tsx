@@ -13,6 +13,7 @@ export default function BoardManager() {
         <button
           disabled={loading}
           className="w-full rounded-xl border border-orange-400 bg-orange-400 p-2 text-center text-lg text-orange-950 shadow-md shadow-orange-950/30 transition transition hover:border-orange-500 hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950 disabled:opacity-60 dark:shadow-orange-500/40"
+          onClick={() => {}}
         >
           Start
         </button>
@@ -28,7 +29,7 @@ export default function BoardManager() {
       />
       <button
         className="border-2 "
-        onClick={() => localStorage.removeItem("clipbroker_boardId")}
+        onClick={() => localStorage.removeItem("clipboard")}
       >
         testing: clearn local boardId
       </button>

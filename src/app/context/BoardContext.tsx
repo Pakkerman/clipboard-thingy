@@ -28,11 +28,12 @@ export function BoardContextProvider(props: BoardContextProvider) {
   const { mutate: createBoard } = api.board.createBoard.useMutation()
   const { mutate: updateBoardPin } = api.board.updateBoardPin.useMutation({
     onSuccess: () => toast.success("Pin updated!", { id: "pin" }),
+    onMutate: () => toast.loading("Updating pin", { id: "pin" }),
   })
 
   function handleUpdatePin(): void {
-    toast.loading("Updating pin", { id: "pin" })
-    updateBoardPin({ id, pin })
+    if (boardData && boardData.pin !== pin && pin.length === 4)
+      updateBoardPin({ id, pin })
   }
 
   useEffect(() => {

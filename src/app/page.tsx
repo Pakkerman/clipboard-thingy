@@ -1,5 +1,4 @@
 import React from "react"
-import Image from "next/image"
 
 import BoardManager from "./_components/BoardManager"
 import Footer from "./_components/Footer"
