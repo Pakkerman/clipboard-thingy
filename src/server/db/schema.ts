@@ -49,7 +49,7 @@ export const files = mysqlTable("file", {
 export const board = mysqlTable("board", {
   id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
 
-  boardId: varchar("boardId", { length: 6 }).notNull(),
+  boardId: varchar("boardId", { length: 6 }).unique().notNull(),
   pin: varchar("pin", { length: 4 }),
 
   createdAt: timestamp("created_at")

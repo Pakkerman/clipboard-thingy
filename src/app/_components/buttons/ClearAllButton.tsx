@@ -6,14 +6,16 @@ import toast from "react-hot-toast"
 import { api } from "~/trpc/react"
 import { MdCancel, MdCheckCircle } from "react-icons/md"
 import { useNavContext } from "~/app/context/NavContext"
-import { useBoardId } from "~/app/hooks/useBoardId"
+import { useParamId } from "~/app/hooks/useParamId"
+import { useBoardContext } from "~/app/context/BoardContext"
 
 export default function ClearAllButton() {
   const utils = api.useUtils()
   const { tab } = useNavContext()
   const [pending, setPending] = useState(false)
-  const boardId = useBoardId()
+  const boardId = useParamId()
   const [animationParent] = useAutoAnimate()
+  const { locked } = useBoardContext()
 
   const { mutate: deleteAllText } = api.text.deleteAll.useMutation({
     onSuccess: () => {
@@ -42,6 +44,8 @@ export default function ClearAllButton() {
   }, [tab])
 
   const mutate = tab === "text" ? deleteAllText : deleteAllFile
+
+  if (locked) return <></>
 
   return (
     <div ref={animationParent} className="flex w-full justify-center gap-2 p-4">

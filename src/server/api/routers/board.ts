@@ -4,58 +4,71 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc"
 import { board } from "~/server/db/schema"
 
 export const boardRouter = createTRPCRouter({
+  getAllBoard: publicProcedure.query(({ ctx }) => {
+    return ctx.db.query.board.findMany()
+  }),
+
   getBoard: publicProcedure
-    .input(z.object({ boardId: z.string() }))
+    .input(z.object({ id: z.string() }))
     .query(({ ctx, input }) => {
       return ctx.db.query.board.findFirst({
-        where: eq(board.boardId, input.boardId),
+        where: eq(board.boardId, input.id),
       })
     }),
 
-  createRecord: publicProcedure
-    .input(
-      z.object({
-        boardId: z.string(),
-        name: z.string(),
-        url: z.string(),
-        size: z.number(),
-        key: z.string(),
-      }),
-    )
-    .mutation(async ({ ctx, input }) => {
-      await ctx.db.insert(files).values({
-        boardId: input.boardId,
-        name: input.name,
-        url: input.url,
-        size: input.size,
-        key: input.key,
-      })
+  updateBoardPin: publicProcedure
+    .input(z.object({ id: z.string(), pin: z.string().min(4) }))
+    .mutation(({ ctx, input }) => {
+      return ctx.db
+        .update(board)
+        .set({ pin: input.pin })
+        .where(eq(board.boardId, input.id))
     }),
 
-  deleteRecord: publicProcedure
-    .input(z.object({ id: z.number(), key: z.string() }))
-    .mutation(async ({ ctx, input }) => {
-      await ctx.db.delete(files).where(eq(files.id, input.id))
-      await utapi.deleteFiles(input.key)
-    }),
+  // createRecord: publicProcedure
+  //   .input(
+  //     z.object({
+  //       boardId: z.string(),
+  //       name: z.string(),
+  //       url: z.string(),
+  //       size: z.number(),
+  //       key: z.string(),
+  //     }),
+  //   )
+  //   .mutation(async ({ ctx, input }) => {
+  //     await ctx.db.insert(files).values({
+  //       boardId: input.boardId,
+  //       name: input.name,
+  //       url: input.url,
+  //       size: input.size,
+  //       key: input.key,
+  //     })
+  //   }),
 
-  deleteAll: publicProcedure
-    .input(z.object({ boardId: z.string() }))
-    .mutation(async ({ ctx, input }) => {
-      const fileKeys = await ctx.db
-        .select({ key: files.key })
-        .from(files)
-        .where(eq(files.boardId, input.boardId))
+  // deleteRecord: publicProcedure
+  //   .input(z.object({ id: z.number(), key: z.string() }))
+  //   .mutation(async ({ ctx, input }) => {
+  //     await ctx.db.delete(files).where(eq(files.id, input.id))
+  //     await utapi.deleteFiles(input.key)
+  //   }),
 
-      // return if there is no files
-      if (fileKeys.length === 0) return
+  // deleteAll: publicProcedure
+  //   .input(z.object({ boardId: z.string() }))
+  //   .mutation(async ({ ctx, input }) => {
+  //     const fileKeys = await ctx.db
+  //       .select({ key: files.key })
+  //       .from(files)
+  //       .where(eq(files.boardId, input.boardId))
 
-      const deleteFileKeys = fileKeys.map((item) => item.key)
+  //     // return if there is no files
+  //     if (fileKeys.length === 0) return
 
-      // delete files on the S3
-      await utapi.deleteFiles(deleteFileKeys)
-      return await ctx.db.delete(files).where(eq(files.boardId, input.boardId))
-    }),
+  //     const deleteFileKeys = fileKeys.map((item) => item.key)
+
+  //     // delete files on the S3
+  //     await utapi.deleteFiles(deleteFileKeys)
+  //     return await ctx.db.delete(files).where(eq(files.boardId, input.boardId))
+  //   }),
 })
 
 export type BoardRouter = typeof boardRouter

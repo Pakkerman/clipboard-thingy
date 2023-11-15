@@ -22,3 +22,9 @@ export function isUrl(string: string) {
   ) // fragment locator
   return !!pattern.test(string)
 }
+
+export function formatIdParam(id: string | string[] | undefined): string {
+  if (!id) return "000000"
+  if (typeof id !== "string") id = id.join("")
+  return id.padStart(6, "0")
+}

@@ -4,7 +4,7 @@ import toast from "react-hot-toast"
 import { api } from "~/trpc/react"
 
 import { useClipboardContext } from "../context/ClipboardContext"
-import { useBoardId } from "../hooks/useBoardId"
+import { useParamId } from "../hooks/useParamId"
 
 import { IoCloseOutline } from "react-icons/io5"
 import { HiExternalLink } from "react-icons/hi"
@@ -12,7 +12,7 @@ import { isUrl } from "../lib/helpers"
 
 export function TextList() {
   const { setContent, selected, setSelected } = useClipboardContext()
-  const boardId = useBoardId()
+  const boardId = useParamId()
   const { data, isLoading } = api.text.getAll.useQuery({ boardId })
 
   async function handleCopy(id: number, content: string) {

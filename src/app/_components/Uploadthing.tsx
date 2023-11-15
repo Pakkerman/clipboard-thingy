@@ -6,14 +6,14 @@ import React from "react"
 import toast from "react-hot-toast"
 import { api } from "~/trpc/react"
 import { useNavContext } from "../context/NavContext"
-import { useBoardId } from "../hooks/useBoardId"
+import { useParamId } from "../hooks/useParamId"
 
 export const { UploadButton, UploadDropzone, Uploader } =
   generateComponents<OurFileRouter>()
 
 export default function uploadthing() {
   const utils = api.useUtils()
-  const boardId = useBoardId()
+  const boardId = useParamId()
   const { setTab } = useNavContext()
   const { mutate } = api.file.createRecord.useMutation({
     onSuccess: async () => {

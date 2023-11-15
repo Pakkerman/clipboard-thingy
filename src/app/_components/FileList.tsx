@@ -5,7 +5,7 @@ import { api } from "~/trpc/react"
 
 import { FileThumbnail } from "./FileThumbnail"
 import { isImageFile } from "~/app/lib/helpers"
-import { useBoardId } from "../hooks/useBoardId"
+import { useParamId } from "../hooks/useParamId"
 
 import { HiOutlineDocumentText, HiOutlinePhotograph } from "react-icons/hi"
 import { FiDownload } from "react-icons/fi"
@@ -13,7 +13,7 @@ import { FiTrash2 } from "react-icons/fi"
 
 export function FileList() {
   const utils = api.useUtils()
-  const boardId = useBoardId()
+  const boardId = useParamId()
 
   const { data, isLoading } = api.file.getAll.useQuery({ boardId })
   const { mutate } = api.file.deleteRecord.useMutation({

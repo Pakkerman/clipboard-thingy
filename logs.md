@@ -83,3 +83,8 @@ Get delete all working.
     - Same goes for user inputed boardId > check if used > check if outdated > purge board
 
   - [ ] Hash pin onto url so that direct url share will not require pin input
+
+### 1114 
+- ADDED: URL helper with regex to show open link button on TextList.tsx
+- ADDED: QRCode
+- 

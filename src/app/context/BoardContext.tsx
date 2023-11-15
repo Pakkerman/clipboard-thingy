@@ -1,29 +1,43 @@
 "use client"
 
 import { createContext, useContext, useEffect, useState } from "react"
+import { api } from "~/trpc/react"
+import { useParamId } from "../hooks/useParamId"
 
 type BoardContext = {
-  boardId: string
-  setBoardId: React.Dispatch<React.SetStateAction<string>>
+  pin: string
+  setPin: React.Dispatch<React.SetStateAction<string>>
+  locked: boolean
+  setLocked: React.Dispatch<React.SetStateAction<boolean>>
+  boardData: any
+  loadingBoard: boolean
 }
 const BoardContext = createContext<BoardContext | null>(null)
 
 type BoardContextProvider = { children: React.ReactNode }
 export function BoardContextProvider(props: BoardContextProvider) {
-  const [boardId, setBoardId] = useState("")
+  const [locked, setLocked] = useState(true)
+  const [pin, setPin] = useState("")
+  const id = useParamId()
+  const { data: boardData, isLoading: loadingBoard } =
+    api.board.getBoard.useQuery({
+      id: id as string,
+    })
 
   useEffect(() => {
-    let id = localStorage.getItem("boardVisited")
-    if (!id) {
-      id = Math.floor(Math.random() * 9999).toString()
-      localStorage.setItem("boardVisited", id)
+    if (loadingBoard) return
+    if (!boardData) {
+      setLocked(false)
+      return
+    } else if (boardData.pin === pin) {
+      setLocked(false)
     }
-
-    setBoardId(id)
-  }, [])
+  }, [pin, loadingBoard])
 
   return (
-    <BoardContext.Provider value={{ boardId, setBoardId }}>
+    <BoardContext.Provider
+      value={{ locked, setLocked, pin, setPin, boardData, loadingBoard }}
+    >
       {props.children}
     </BoardContext.Provider>
   )

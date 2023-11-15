@@ -2,9 +2,13 @@
 
 import React from "react"
 import { useNavContext } from "../context/NavContext"
+import { useBoardContext } from "../context/BoardContext"
 
 export default function Nav() {
   const { tab, setTab } = useNavContext()
+  const { locked } = useBoardContext()
+
+  if (locked) return <></>
 
   return (
     <nav className="py-4">

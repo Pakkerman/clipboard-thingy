@@ -1,34 +1,21 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React from "react"
 import Link from "next/link"
-
-// getting board from localstorage, if there's no board, generate new
+import useLocalBoardId from "../hooks/useLocalBoardId"
 
 export default function BoardManager() {
-  const [inputId, setInputId] = useState("Loading...")
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const localStorageId = localStorage.getItem("clipbroker_boardId")
-    if (!localStorageId || localStorageId === "undefined") {
-      const newId = generateNewBoardId()
-
-      localStorage.setItem("clipbroker_boardId", newId)
-    }
-    const boardId = localStorage.getItem("clipbroker_boardId")!
-
-    setInputId(boardId)
-    setLoading(false)
-  }, [])
+  const { inputId, setInputId, loading } = useLocalBoardId()
 
   return (
     <section className="flex flex-col gap-4 py-6 font-chakraPetch">
-      <Link
-        className="rounded-xl border border-orange-400 bg-orange-400 p-2 text-lg text-orange-950 shadow-md shadow-orange-950/30 transition hover:border-orange-500 hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950 dark:shadow-orange-500/40"
-        href={"/" + inputId}
-      >
-        <div className="text-center">Start</div>
+      <Link className="" href={"/" + inputId}>
+        <button
+          disabled={loading}
+          className="w-full rounded-xl border border-orange-400 bg-orange-400 p-2 text-center text-lg text-orange-950 shadow-md shadow-orange-950/30 transition transition hover:border-orange-500 hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950 disabled:opacity-60 dark:shadow-orange-500/40"
+        >
+          Start
+        </button>
       </Link>
       <br />
       <p className="text-center">Board ID</p>
@@ -39,6 +26,12 @@ export default function BoardManager() {
         maxLength={6}
         onChange={(event) => setInputId(event.target.value)}
       />
+      <button
+        className="border-2 "
+        onClick={() => localStorage.removeItem("clipbroker_boardId")}
+      >
+        testing: clearn local boardId
+      </button>
     </section>
   )
 }
