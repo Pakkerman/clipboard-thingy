@@ -2,10 +2,10 @@
 
 import React from "react"
 import Link from "next/link"
-import useLocalBoardId from "../hooks/useLocalBoardId"
+import useLocalBoardData from "../hooks/useLocalBoardData"
 
 export default function BoardManager() {
-  const { inputId, setInputId, loading } = useLocalBoardId()
+  const { inputId, setInputId, loading } = useLocalBoardData()
 
   return (
     <section className="flex flex-col gap-4 py-6 font-chakraPetch">

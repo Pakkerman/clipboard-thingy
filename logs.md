@@ -92,4 +92,4 @@ Get delete all working.
 ### 1115 
 - Create board on new id login
 - Styled QRCode component
-- 
+- [ ] TODO: attach pin on url to allow pinless unlock, so that only the user have the exact pin will allow to distribute this board, other people that doesn't have the url will have to input the pin, which is unlikely if they are just guessing. This will provide security to the user that has claim the board via setting pin. and other people that trying to access will be denied. While still provide quick and easy way to share the unlocked board url, it will suck if that every time you refresh page that you will be required to enter pin again, or that when you shared the link to other device for the same. Clunky. 

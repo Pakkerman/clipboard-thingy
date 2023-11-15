@@ -16,7 +16,6 @@ const BoardContext = createContext<BoardContext | null>(null)
 
 type BoardContextProvider = { children: React.ReactNode }
 export function BoardContextProvider(props: BoardContextProvider) {
-  console.log("you run")
   const [locked, setLocked] = useState(true)
   const [pin, setPin] = useState("")
   const id = useParamId()

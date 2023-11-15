@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { api } from "~/trpc/react"
 
-export default function useLocalBoardId() {
+export default function useLocalBoardData() {
   const { data: boardList, isLoading: isLoadingBoardList } =
     api.board.getAllBoard.useQuery()
   const [inputId, setInputId] = useState("Loading...")
@@ -10,19 +10,23 @@ export default function useLocalBoardId() {
   useEffect(() => {
     if (isLoadingBoardList) return
 
-    const localStorageId = localStorage.getItem("clipbroker_boardId")
-    if (!localStorageId || localStorageId === "undefined") {
+    let localStorageJSON = localStorage.getItem("clipbroker")
+    if (!localStorageJSON || localStorageJSON === "undefined") {
       const usedBoardIds = boardList?.map((item) => item.boardId)
       let newId = generateNewBoardId()
       while (usedBoardIds?.includes(newId)) newId = generateNewBoardId()
 
-      localStorage.setItem("clipbroker_boardId", newId)
+      const json = { boardId: newId }
+      localStorage.setItem("clipbroker", JSON.stringify(json))
+      localStorageJSON = localStorage.getItem("clipbroker")!
     }
-    const boardId = localStorage.getItem("clipbroker_boardId")!
+
+    const boardId = JSON.parse(localStorageJSON)["boardId"]
 
     setInputId(boardId)
     setLoading(false)
   }, [isLoadingBoardList])
+
   return { inputId, setInputId, loading }
 }
 

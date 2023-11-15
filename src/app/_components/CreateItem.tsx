@@ -41,7 +41,6 @@ export default function CreatItem() {
 
   function handleKeyPress(event: KeyboardEvent) {
     if (text.length === 0) return
-    console.log(event.key)
     if (event.key === "Enter" && event.metaKey) mutate({ text, boardId })
   }
 
