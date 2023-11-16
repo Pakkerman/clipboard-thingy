@@ -11,15 +11,13 @@ import Nav from "../_components/Nav"
 
 import toast from "react-hot-toast"
 import { FiCopy, FiHome } from "react-icons/fi"
-import { api } from "~/trpc/react"
 import QRCode from "../_components/QRCode"
 import { useBoardContext } from "../context/BoardContext"
 import { PasscodeInput } from "../_components/PasscodeInput"
 
 export default function Page() {
   const { id } = useParams()
-  const query = useSearchParams()
-
+  const [changePinInput, setChangePinInput] = useState("")
   const [showPinInput, setShowPinInput] = useState(false)
   const { boardData, isLoadingBoard, pin, setPin, locked, handleUpdatePin } =
     useBoardContext()
@@ -39,7 +37,7 @@ export default function Page() {
           className="rounded-md border-[0.5px] border-black/20 px-4 py-2"
           onClick={() => {
             setShowPinInput(!showPinInput)
-            if (showPinInput) handleUpdatePin()
+            if (showPinInput) handleUpdatePin(changePinInput)
           }}
         >
           {boardData?.pin ? "Change pin" : "Set pin"}
@@ -47,11 +45,11 @@ export default function Page() {
         {showPinInput && (
           <input
             className="text-center"
-            value={pin}
+            value={changePinInput}
             minLength={4}
             maxLength={4}
-            placeholder={boardData?.pin ? boardData.pin : "____"}
-            onChange={(event) => setPin(event.target.value)}
+            placeholder={boardData?.pin ? boardData.pin : "----"}
+            onChange={(event) => setChangePinInput(event.target.value)}
           />
         )}
         <p>

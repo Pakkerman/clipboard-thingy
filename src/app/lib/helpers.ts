@@ -39,3 +39,19 @@ export function setLocalData(key: string, value: string): void {
   storage[key] = value
   localStorage.clipboard = JSON.stringify(storage)
 }
+
+export function initLocalStorage(): void {
+  const initLocalStorage = JSON.stringify({
+    boardId: generateNewBoardId(),
+    theme: "light",
+  })
+
+  if (!localStorage.getItem("clipboard"))
+    localStorage.setItem("clipboard", initLocalStorage)
+}
+
+export function generateNewBoardId(): string {
+  return Math.floor(Math.random() * 100000)
+    .toString()
+    .padStart(6, "0")
+}

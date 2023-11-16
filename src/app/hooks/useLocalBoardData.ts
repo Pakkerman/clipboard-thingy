@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { api } from "~/trpc/react"
+import { generateNewBoardId, setLocalData } from "../lib/helpers"
 
 export default function useLocalBoardData() {
   const { data: boardIdList, isLoading: isLoadingBoardList } =
@@ -10,10 +11,9 @@ export default function useLocalBoardData() {
   useEffect(() => {
     if (isLoadingBoardList) return
     // localStorage.removeItem("clipboard")
-    initLocalStorage()
     const boardId = JSON.parse(localStorage.clipboard)["boardId"]
     while (boardIdList?.includes(boardId)) {
-      setItem("boardId", generateNewBoardId())
+      setLocalData("boardId", generateNewBoardId())
     }
 
     setInputId(boardId)
@@ -21,35 +21,4 @@ export default function useLocalBoardData() {
   }, [isLoadingBoardList, boardIdList])
 
   return { inputId, setInputId, loading }
-}
-
-function generateNewBoardId(): string {
-  return Math.floor(Math.random() * 100000)
-    .toString()
-    .padStart(6, "0")
-}
-
-function setItem(key: string, value: string): void {
-  const local = localStorage.getItem("clipboard")
-  let json = {}
-  if (local) json = JSON.parse(local)
-
-  localStorage.setItem("clipboard", JSON.stringify({ ...json, [key]: value }))
-}
-
-function getItem(key: string): string {
-  const json = localStorage.getItem("clipboard")
-  if (!json) setItem(key, generateNewBoardId())
-  return JSON.parse(json!).key
-}
-
-function initLocalStorage(): void {
-  const initLocalStorage = JSON.stringify({
-    boardId: generateNewBoardId(),
-    theme: "light",
-    pin: "",
-  })
-
-  if (!localStorage.getItem("clipboard"))
-    localStorage.setItem("clipboard", initLocalStorage)
 }

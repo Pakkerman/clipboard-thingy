@@ -7,7 +7,7 @@ export default function QRCode() {
   useEffect(() => {
     if (!window) return
     setUrl(window.location.href)
-  }, [])
+  }, [window.location.href])
 
   if (url === "") return <></>
   return (

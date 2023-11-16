@@ -1,12 +1,9 @@
 "use client"
 
-import React, {
-  SetStateAction,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react"
+import React, { createContext, useContext, useEffect, useState } from "react"
+import { getLocalData, initLocalStorage, setLocalData } from "../lib/helpers"
+
+initLocalStorage()
 
 type Theme = "light" | "dark"
 type ThemeContext = {
@@ -24,19 +21,17 @@ export function ThemeContextProvider({ children }: ThemeContextProviderProps) {
   function toggleTheme() {
     if (theme === "light") {
       setTheme("dark")
-      window.localStorage.setItem("clipbroker_theme", "dark")
+      setLocalData("theme", "dark")
       document.documentElement.classList.add("dark")
     } else {
       setTheme("light")
-      window.localStorage.setItem("clipbroker_theme", "light")
+      setLocalData("theme", "light")
       document.documentElement.classList.remove("dark")
     }
   }
 
   useEffect(() => {
-    const theme = window.localStorage.getItem(
-      "clipbroker_theme",
-    ) as Theme | null
+    const theme = getLocalData("theme") as Theme
     if (theme) {
       setTheme(theme)
       if (theme === "dark") document.documentElement.classList.add("dark")

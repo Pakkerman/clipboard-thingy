@@ -13,7 +13,7 @@ type BoardContext = {
   setLocked: React.Dispatch<React.SetStateAction<boolean>>
   boardData: any
   isLoadingBoard: boolean
-  handleUpdatePin: () => void
+  handleUpdatePin: (inputPin: string) => void
 }
 const BoardContext = createContext<BoardContext | null>(null)
 
@@ -39,9 +39,11 @@ export function BoardContextProvider(props: BoardContextProvider) {
     onMutate: () => toast.loading("Updating pin", { id: "pin" }),
   })
 
-  function handleUpdatePin(): void {
-    if (boardData && boardData.pin !== pin && pin.length === 4)
-      updateBoardPin({ id, pin })
+  function handleUpdatePin(inputPin: string): void {
+    if (boardData && boardData.pin !== inputPin && inputPin.length === 4) {
+      updateBoardPin({ id, pin: inputPin })
+      setPinParams(inputPin)
+    }
   }
 
   // try to only output one loading state
