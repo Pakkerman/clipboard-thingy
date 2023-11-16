@@ -4,10 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { api } from "~/trpc/react"
 import { useParamId } from "../hooks/useParamId"
 import toast from "react-hot-toast"
-import { setLocalData } from "../lib/helpers"
-
-const storage = JSON.parse(localStorage.clipboard)
-const localPin = storage.pin
+import usePinParams from "../hooks/usePinParams"
 
 type BoardContext = {
   pin: string
@@ -22,8 +19,10 @@ const BoardContext = createContext<BoardContext | null>(null)
 
 type BoardContextProvider = { children: React.ReactNode }
 export function BoardContextProvider(props: BoardContextProvider) {
+  const { getPinParams, setPinParams } = usePinParams()
   const [locked, setLocked] = useState(true)
-  const [pin, setPin] = useState(localPin)
+  const [loading, setLoading] = useState(true)
+  const [pin, setPin] = useState(getPinParams())
   const id = useParamId()
   const utils = api.useUtils()
   const { data: boardData, isLoading: isLoadingBoard } =
@@ -45,13 +44,14 @@ export function BoardContextProvider(props: BoardContextProvider) {
       updateBoardPin({ id, pin })
   }
 
+  // try to only output one loading state
   useEffect(() => {
     if (isLoadingBoard) return
     if (!boardData) {
       setLocked(false)
       createBoard({ id: id as string, pin: null })
     } else if (boardData.pin === pin || boardData.pin == null) {
-      setLocalData("pin", pin)
+      setPinParams(pin)
       setLocked(false)
     }
   }, [pin, isLoadingBoard])

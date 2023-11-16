@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import Link from "next/link"
-import { useParams } from "next/navigation"
+import { useParams, useSearchParams } from "next/navigation"
 
 import Clipboard from "~/app/_components/Clipboard"
 import CreateItem from "../_components/CreateItem"
@@ -18,11 +18,13 @@ import { PasscodeInput } from "../_components/PasscodeInput"
 
 export default function Page() {
   const { id } = useParams()
+  const query = useSearchParams()
+
   const [showPinInput, setShowPinInput] = useState(false)
   const { boardData, isLoadingBoard, pin, setPin, locked, handleUpdatePin } =
     useBoardContext()
 
-  if (!boardData) return <>loading page</>
+  if (isLoadingBoard) return <>loading page</>
   if (locked) return <PasscodeInput pin={pin} setPin={setPin} />
 
   return (
@@ -37,12 +39,7 @@ export default function Page() {
           className="rounded-md border-[0.5px] border-black/20 px-4 py-2"
           onClick={() => {
             setShowPinInput(!showPinInput)
-            if (showPinInput) {
-              handleUpdatePin()
-              const storage = JSON.parse(localStorage.clipboard)
-              storage.pin = pin
-              localStorage.clipboard = JSON.stringify(storage)
-            }
+            if (showPinInput) handleUpdatePin()
           }}
         >
           {boardData?.pin ? "Change pin" : "Set pin"}
@@ -54,9 +51,7 @@ export default function Page() {
             minLength={4}
             maxLength={4}
             placeholder={boardData?.pin ? boardData.pin : "____"}
-            onChange={(event) => {
-              setPin(event.target.value)
-            }}
+            onChange={(event) => setPin(event.target.value)}
           />
         )}
         <p>
