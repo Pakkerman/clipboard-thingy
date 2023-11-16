@@ -4,6 +4,10 @@ import { createContext, useContext, useEffect, useState } from "react"
 import { api } from "~/trpc/react"
 import { useParamId } from "../hooks/useParamId"
 import toast from "react-hot-toast"
+import { setLocalData } from "../lib/helpers"
+
+const storage = JSON.parse(localStorage.clipboard)
+const localPin = storage.pin
 
 type BoardContext = {
   pin: string
@@ -19,15 +23,20 @@ const BoardContext = createContext<BoardContext | null>(null)
 type BoardContextProvider = { children: React.ReactNode }
 export function BoardContextProvider(props: BoardContextProvider) {
   const [locked, setLocked] = useState(true)
-  const [pin, setPin] = useState("")
+  const [pin, setPin] = useState(localPin)
   const id = useParamId()
+  const utils = api.useUtils()
   const { data: boardData, isLoading: isLoadingBoard } =
     api.board.getBoard.useQuery({
       id: id as string,
     })
-  const { mutate: createBoard } = api.board.createBoard.useMutation()
+  const { mutate: createBoard } = api.board.createBoard.useMutation({
+    onSuccess: () => utils.board.getBoard.invalidate(),
+  })
   const { mutate: updateBoardPin } = api.board.updateBoardPin.useMutation({
-    onSuccess: () => toast.success("Pin updated!", { id: "pin" }),
+    onSuccess: () => {
+      toast.success("Pin updated!", { id: "pin" })
+    },
     onMutate: () => toast.loading("Updating pin", { id: "pin" }),
   })
 
@@ -41,7 +50,10 @@ export function BoardContextProvider(props: BoardContextProvider) {
     if (!boardData) {
       setLocked(false)
       createBoard({ id: id as string, pin: null })
-    } else if (boardData.pin === pin || boardData.pin == null) setLocked(false)
+    } else if (boardData.pin === pin || boardData.pin == null) {
+      setLocalData("pin", pin)
+      setLocked(false)
+    }
   }, [pin, isLoadingBoard])
 
   return (

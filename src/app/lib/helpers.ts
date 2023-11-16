@@ -28,3 +28,14 @@ export function formatIdParam(id: string | string[] | undefined): string {
   if (typeof id !== "string") id = id.join("")
   return id.padStart(6, "0")
 }
+
+export function getLocalData(key: string): string {
+  const storage = JSON.parse(localStorage.clipboard)
+  return storage[key]
+}
+
+export function setLocalData(key: string, value: string): void {
+  const storage = JSON.parse(localStorage.clipboard)
+  storage[key] = value
+  localStorage.clipboard = JSON.stringify(storage)
+}

@@ -13,7 +13,12 @@ export default function BoardManager() {
         <button
           disabled={loading}
           className="w-full rounded-xl border border-orange-400 bg-orange-400 p-2 text-center text-lg text-orange-950 shadow-md shadow-orange-950/30 transition transition hover:border-orange-500 hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950 disabled:opacity-60 dark:shadow-orange-500/40"
-          onClick={() => {}}
+          onClick={() => {
+            // Set boardId after user click start, this will update correctly if use manual inputed a id
+            const storage = JSON.parse(localStorage.clipboard)
+            storage.boardId = inputId
+            localStorage.clipboard = JSON.stringify(storage)
+          }}
         >
           Start
         </button>

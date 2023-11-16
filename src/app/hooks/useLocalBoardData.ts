@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react"
 import { api } from "~/trpc/react"
 
-localStorage.removeItem("clipboard")
-initLocalStorage()
-
 export default function useLocalBoardData() {
   const { data: boardIdList, isLoading: isLoadingBoardList } =
     api.board.getAllBoard.useQuery()
@@ -12,14 +9,16 @@ export default function useLocalBoardData() {
 
   useEffect(() => {
     if (isLoadingBoardList) return
-    const boardId = JSON.parse(localStorage.getItem("clipboard")!)["boardId"]
+    // localStorage.removeItem("clipboard")
+    initLocalStorage()
+    const boardId = JSON.parse(localStorage.clipboard)["boardId"]
     while (boardIdList?.includes(boardId)) {
       setItem("boardId", generateNewBoardId())
     }
 
     setInputId(boardId)
     setLoading(false)
-  }, [isLoadingBoardList])
+  }, [isLoadingBoardList, boardIdList])
 
   return { inputId, setInputId, loading }
 }
@@ -48,6 +47,7 @@ function initLocalStorage(): void {
   const initLocalStorage = JSON.stringify({
     boardId: generateNewBoardId(),
     theme: "light",
+    pin: "",
   })
 
   if (!localStorage.getItem("clipboard"))

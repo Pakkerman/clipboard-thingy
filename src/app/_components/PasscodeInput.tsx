@@ -38,17 +38,10 @@ type NumberPadProps = { setPin: React.Dispatch<React.SetStateAction<string>> }
 function NumberPad(props: NumberPadProps) {
   const { setPin } = props
 
-  function handleClick(number: string) {
+  const handleClick = (number: string) =>
     setPin((prev) => (prev + number).slice(0, 4))
-  }
-
-  function handleDelete() {
-    setPin((prev) => prev.slice(0, prev.length - 1))
-  }
-
-  function handleReset() {
-    setPin("")
-  }
+  const handleDelete = () => setPin((prev) => prev.slice(0, prev.length - 1))
+  const handleReset = () => setPin("")
 
   return (
     <div className="flex flex-col gap-2">

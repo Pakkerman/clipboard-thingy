@@ -22,15 +22,11 @@ export default function Page() {
   const { boardData, isLoadingBoard, pin, setPin, locked, handleUpdatePin } =
     useBoardContext()
 
-  if (locked)
-    return (
-      <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-orange-50 to-gray-50 pb-20 pt-5 font-chakraPetch text-slate-900 transition ">
-        <PasscodeInput pin={pin} setPin={setPin} />
-      </main>
-    )
+  if (!boardData) return <>loading page</>
+  if (locked) return <PasscodeInput pin={pin} setPin={setPin} />
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-orange-50 to-gray-50 pb-20 pt-5 font-chakraPetch text-slate-900 transition ">
+    <>
       <Clipboard />
       <Nav />
       <CreateItem />
@@ -41,19 +37,26 @@ export default function Page() {
           className="rounded-md border-[0.5px] border-black/20 px-4 py-2"
           onClick={() => {
             setShowPinInput(!showPinInput)
-            if (showPinInput) handleUpdatePin()
+            if (showPinInput) {
+              handleUpdatePin()
+              const storage = JSON.parse(localStorage.clipboard)
+              storage.pin = pin
+              localStorage.clipboard = JSON.stringify(storage)
+            }
           }}
         >
           {boardData?.pin ? "Change pin" : "Set pin"}
         </button>
         {showPinInput && (
           <input
-            className=""
+            className="text-center"
             value={pin}
             minLength={4}
             maxLength={4}
             placeholder={boardData?.pin ? boardData.pin : "____"}
-            onChange={(event) => setPin(event.target.value)}
+            onChange={(event) => {
+              setPin(event.target.value)
+            }}
           />
         )}
         <p>
@@ -81,6 +84,6 @@ export default function Page() {
 
       <QRCode />
       <Footer />
-    </main>
+    </>
   )
 }
