@@ -14,7 +14,7 @@ import { FiCopy, FiHome } from "react-icons/fi"
 import QRCode from "../_components/QRCode"
 import { useBoardContext } from "../context/BoardContext"
 import { PasscodeInput } from "../_components/PasscodeInput"
-import Loading from "../_components/Loading"
+import LoadingSpinner from "../_components/Loading"
 
 export default function Page() {
   const { id } = useParams()
@@ -23,7 +23,7 @@ export default function Page() {
   const { boardData, loading, pin, setPin, locked, handleUpdatePin } =
     useBoardContext()
 
-  if (loading) return <Loading />
+  if (loading) return <LoadingSpinner size={16} />
   if (locked) return <PasscodeInput pin={pin} setPin={setPin} />
 
   return (

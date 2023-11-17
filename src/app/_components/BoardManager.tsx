@@ -4,6 +4,7 @@ import React from "react"
 import Link from "next/link"
 import useLocalBoardData from "../hooks/useLocalBoardData"
 import { setLocalData } from "../lib/helpers"
+import LoadingSpinner from "./Loading"
 
 export default function BoardManager() {
   const { inputId, setInputId, loading } = useLocalBoardData()
@@ -13,13 +14,13 @@ export default function BoardManager() {
       <Link className="" href={"/" + inputId}>
         <button
           disabled={loading}
-          className="w-full rounded-xl border border-orange-400 bg-orange-400 p-2 text-center text-lg text-orange-950 shadow-md shadow-orange-950/30 transition  hover:border-orange-500 hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950 disabled:opacity-60 dark:shadow-orange-500/40"
+          className="flex h-12 w-full items-center justify-center rounded-xl border border-orange-400 bg-orange-400 p-2 text-center text-lg text-orange-950  shadow-md shadow-orange-950/30 transition hover:border-orange-500 hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950 disabled:opacity-60 dark:shadow-orange-500/40"
           onClick={() => {
             // Set boardId after user click start, this will update correctly if use manual inputed a id
             setLocalData("boardId", inputId)
           }}
         >
-          Start
+          {loading ? <LoadingSpinner size={4} /> : "Start"}
         </button>
       </Link>
       <br />
