@@ -14,8 +14,8 @@ export function PasscodeInput(props: PinPadProps) {
   const { pin, setPin } = props
 
   return (
-    <div className="flex h-full flex-col justify-center gap-2">
-      <div className=" flex flex-col justify-center gap-2 rounded-xl border border-black/10 p-4 shadow-inner shadow-black/20">
+    <div className="flex h-full flex-col justify-center gap-2 bg-orange-50">
+      <div className="flex flex-col justify-center gap-2 rounded-xl border border-black/10 p-4 shadow-inner shadow-orange-950/40">
         <h3>Please Enter Pin</h3>
         <input
           className={`rounded-xl border border-black/20 bg-orange-50 p-1 text-center accent-orange-500 shadow-inner shadow-orange-950/40 transition dark:text-orange-950 ${
@@ -62,7 +62,7 @@ function NumberPad(props: NumberPadProps) {
       </div>
       <div className="flex gap-2 ">
         <NumberPadButton number="" handleClick={handleReset}>
-          <CiRedo size={20} />
+          <CiRedo size={24} />
         </NumberPadButton>
         <NumberPadButton number="0" handleClick={handleClick} />
         <NumberPadButton number="" handleClick={handleDelete}>
@@ -83,7 +83,7 @@ function NumberPadButton(props: NumberPadButtonProps) {
   return (
     <button
       onClick={() => props.handleClick(props.number)}
-      className=" flex basis-1/3 items-center justify-center rounded-md border border-orange-400 p-2 text-orange-950/80"
+      className="flex basis-1/3 items-center justify-center rounded-md border-[0.5px] border-orange-400 p-2 text-orange-950/80 shadow-orange-950/60 transition hover:bg-orange-400 active:border-orange-500 active:bg-orange-500 "
     >
       {props.number || props.children}
     </button>
