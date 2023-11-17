@@ -19,10 +19,10 @@ export default function Page() {
   const { id } = useParams()
   const [changePinInput, setChangePinInput] = useState("")
   const [showPinInput, setShowPinInput] = useState(false)
-  const { boardData, isLoadingBoard, pin, setPin, locked, handleUpdatePin } =
+  const { boardData, loading, pin, setPin, locked, handleUpdatePin } =
     useBoardContext()
 
-  if (isLoadingBoard) return <>loading page</>
+  if (loading) return <>loading page</>
   if (locked) return <PasscodeInput pin={pin} setPin={setPin} />
 
   return (

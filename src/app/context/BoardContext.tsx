@@ -12,8 +12,8 @@ type BoardContext = {
   locked: boolean
   setLocked: React.Dispatch<React.SetStateAction<boolean>>
   boardData: any
-  isLoadingBoard: boolean
   handleUpdatePin: (inputPin: string) => void
+  loading: boolean
 }
 const BoardContext = createContext<BoardContext | null>(null)
 
@@ -50,12 +50,13 @@ export function BoardContextProvider(props: BoardContextProvider) {
   useEffect(() => {
     if (isLoadingBoard) return
     if (!boardData) {
-      setLocked(false)
       createBoard({ id: id as string, pin: null })
+      setLocked(false)
     } else if (boardData.pin === pin || boardData.pin == null) {
       setPinParams(pin)
       setLocked(false)
-    }
+      setLoading(false)
+    } else setLoading(false)
   }, [pin, isLoadingBoard])
 
   return (
@@ -66,7 +67,7 @@ export function BoardContextProvider(props: BoardContextProvider) {
         pin,
         setPin,
         boardData,
-        isLoadingBoard,
+        loading,
         handleUpdatePin,
       }}
     >

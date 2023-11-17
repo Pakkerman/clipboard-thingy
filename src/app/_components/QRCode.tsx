@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react"
 import { QRCodeSVG } from "qrcode.react"
+import usePinParams from "../hooks/usePinParams"
 
 export default function QRCode() {
+  const { setPinParams } = usePinParams()
   const [url, setUrl] = useState("")
 
   useEffect(() => {
     if (!window) return
     setUrl(window.location.href)
-  }, [window.location.href])
+  }, [setPinParams])
 
   if (url === "") return <></>
   return (
