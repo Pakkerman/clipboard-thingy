@@ -97,3 +97,4 @@ Get delete all working.
 ### 1117
 - Emoji support for text ?
 - [x] TODO: Increase text limit, 256 is too small, increase to 3000
+- 

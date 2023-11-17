@@ -1,6 +1,6 @@
 "use client"
 
-import React, { SetStateAction } from "react"
+import React from "react"
 import { useNavContext } from "../context/NavContext"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { TextList } from "./TextList"
@@ -16,13 +16,6 @@ export default function Clipboard() {
         ref={animationParent}
         className="flex h-[450px] flex-col items-center gap-2 overflow-y-scroll rounded-xl border-orange-400 p-4"
       >
-        {/* {locked ? (
-          <PinInput pin={pin} setPin={setPin} />
-        ) : tab === "text" ? (
-          <TextList />
-        ) : (
-          <FileList />
-        )} */}
         {tab === "text" ? <TextList /> : <FileList />}
       </ul>
     </section>
