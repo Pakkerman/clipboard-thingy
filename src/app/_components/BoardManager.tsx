@@ -3,8 +3,8 @@
 import React from "react"
 import Link from "next/link"
 import useLocalBoardData from "../hooks/useLocalBoardData"
-import { setLocalData } from "../lib/helpers"
-import LoadingSpinner from "./Loading"
+import { setLocalData } from "../lib/localStorageHelpers"
+import { LoadingSpinner } from "./LoadingSpinner"
 
 export default function BoardManager() {
   const { inputId, setInputId, loading } = useLocalBoardData()
@@ -40,10 +40,4 @@ export default function BoardManager() {
       </button>
     </section>
   )
-}
-
-function generateNewBoardId(): string {
-  return Math.floor(Math.random() * 100000)
-    .toString()
-    .padStart(6, "0")
 }

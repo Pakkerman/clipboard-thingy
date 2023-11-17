@@ -29,27 +29,6 @@ export function formatIdParam(id: string | string[] | undefined): string {
   return id.padStart(6, "0")
 }
 
-export function getLocalData(key: string): string {
-  const storage = JSON.parse(localStorage.clipboard)
-  return storage[key]
-}
-
-export function setLocalData(key: string, value: string): void {
-  const storage = JSON.parse(localStorage.clipboard)
-  storage[key] = value
-  localStorage.clipboard = JSON.stringify(storage)
-}
-
-export function initLocalStorage(): void {
-  const initLocalStorage = JSON.stringify({
-    boardId: generateNewBoardId(),
-    theme: "light",
-  })
-
-  if (!localStorage.getItem("clipboard"))
-    localStorage.setItem("clipboard", initLocalStorage)
-}
-
 export function generateNewBoardId(): string {
   return Math.floor(Math.random() * 100000)
     .toString()

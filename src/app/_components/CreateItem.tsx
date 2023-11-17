@@ -1,23 +1,20 @@
 "use client"
 
-import React, { useContext, useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { api } from "~/trpc/react"
 
-import { useClipboardContext } from "../context/ClipboardContext"
 import { useNavContext } from "../context/NavContext"
 import { useParamId } from "../hooks/useParamId"
 import Uploadthing from "./Uploadthing"
 import ClearAllButton from "./buttons/ClearAllButton"
 
 import { useAutoAnimate } from "@formkit/auto-animate/react"
-import useBoard from "../hooks/useBoard"
 import { useBoardContext } from "../context/BoardContext"
 import { BiCommand } from "react-icons/bi"
 import { IoReturnDownBackSharp } from "react-icons/io5"
 import toast from "react-hot-toast"
 
 export default function CreatItem() {
-  // const { content } = useClipboardContext()
   const { tab, setTab } = useNavContext()
   const utils = api.useUtils()
   const boardId = useParamId()

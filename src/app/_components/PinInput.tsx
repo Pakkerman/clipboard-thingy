@@ -4,7 +4,6 @@ import React, { useCallback } from "react"
 import { BsBackspace } from "react-icons/bs"
 import { CiRedo } from "react-icons/ci"
 import { useBoardContext } from "../context/BoardContext"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 type PinPadProps = {
   pin: string

@@ -1,9 +1,7 @@
 import React from "react"
 
-type LoadingSpinnerProps = {
-  size: number
-}
-export default function LoadingSpinner({ size = 4 }: LoadingSpinnerProps) {
+type LoadingSpinnerProps = { size: number }
+export function LoadingSpinner({ size = 4 }: LoadingSpinnerProps) {
   return (
     <div role="status">
       <svg

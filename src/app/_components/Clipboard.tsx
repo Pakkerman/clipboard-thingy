@@ -5,7 +5,6 @@ import { useNavContext } from "../context/NavContext"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { TextList } from "./TextList"
 import { FileList } from "./FileList"
-import { useBoardContext } from "../context/BoardContext"
 
 export default function Clipboard() {
   const { tab } = useNavContext()

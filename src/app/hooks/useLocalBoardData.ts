@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { api } from "~/trpc/react"
-import { generateNewBoardId, setLocalData } from "../lib/helpers"
+import { generateNewBoardId } from "../lib/helpers"
+import { setLocalData } from "../lib/localStorageHelpers"
 
 export default function useLocalBoardData() {
   const { data: boardIdList, isLoading: isLoadingBoardList } =

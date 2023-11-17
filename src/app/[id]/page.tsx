@@ -13,8 +13,8 @@ import toast from "react-hot-toast"
 import { FiCopy, FiHome } from "react-icons/fi"
 import QRCode from "../_components/QRCode"
 import { useBoardContext } from "../context/BoardContext"
-import { PasscodeInput } from "../_components/PasscodeInput"
-import LoadingSpinner from "../_components/Loading"
+import { PasscodeInput } from "../_components/PinInput"
+import { LoadingSpinner } from "../_components/LoadingSpinner"
 
 export default function Page() {
   const { id } = useParams()

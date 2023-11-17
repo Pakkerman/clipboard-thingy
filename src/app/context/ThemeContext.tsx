@@ -1,7 +1,11 @@
 "use client"
 
 import React, { createContext, useContext, useEffect, useState } from "react"
-import { getLocalData, initLocalStorage, setLocalData } from "../lib/helpers"
+import {
+  getLocalData,
+  initLocalStorage,
+  setLocalData,
+} from "../lib/localStorageHelpers"
 
 initLocalStorage()
 
