@@ -47,7 +47,7 @@ export function TextList() {
       {data?.map((item) => (
         <li
           key={item.id}
-          className={`flex min-h-min w-full cursor-pointer items-center justify-between gap-2 rounded-xl border p-4 shadow-black/20 transition hover:shadow-md active:shadow-inner ${
+          className={`flex min-h-min w-full cursor-pointer items-center justify-between gap-2 rounded-xl border-[0.5px] border-black/50  p-4 shadow-black/20 transition hover:shadow-md active:shadow-inner ${
             selected === item.id
               ? "shadow-inner hover:shadow-inner"
               : "shadow-none"
@@ -95,7 +95,7 @@ function DeleteButton({ id }: DeleteButtonProps) {
 
   return (
     <button
-      className="h-6 w-6 rounded-lg border hover:border-black/60"
+      className="h-6 w-6 rounded-lg border border-black/20 hover:border-orange-400 "
       onClick={(event) => {
         event.stopPropagation()
         mutate({ id })

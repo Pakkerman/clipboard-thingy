@@ -36,7 +36,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-sans ${roboto.variable} ${chakraPetch.variable}`}>
+      <body
+        className={`font-sans ${roboto.variable} ${chakraPetch.variable} bg-gradient-to-b from-orange-50 to-gray-50 text-orange-950 dark:from-orange-950 dark:to-slate-950 dark:text-orange-50`}
+      >
         <ThemeContextProvider>
           <Toaster />
           <NavContextProvider>
