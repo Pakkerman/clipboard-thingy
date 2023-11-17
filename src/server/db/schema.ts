@@ -23,7 +23,7 @@ export const texts = mysqlTable("text", {
   id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
 
   boardId: varchar("boardId", { length: 16 }),
-  content: varchar("content", { length: 256 }),
+  content: varchar("content", { length: 3000 }),
 
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)

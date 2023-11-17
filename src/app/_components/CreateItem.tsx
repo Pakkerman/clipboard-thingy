@@ -14,6 +14,7 @@ import useBoard from "../hooks/useBoard"
 import { useBoardContext } from "../context/BoardContext"
 import { BiCommand } from "react-icons/bi"
 import { IoReturnDownBackSharp } from "react-icons/io5"
+import toast from "react-hot-toast"
 
 export default function CreatItem() {
   // const { content } = useClipboardContext()
@@ -29,13 +30,18 @@ export default function CreatItem() {
     onMutate: () => {
       if (text.length === 0 && textareaRef.current) textareaRef.current.focus()
     },
-    onSettled: () => {
+    onSuccess: () => {
       utils.text.getAll.invalidate()
       setText("")
       setTab("text")
       window.scrollTo({ behavior: "smooth", top: 0 })
       // reset text area rows
       if (textareaRef.current) textareaRef.current.rows = 2
+    },
+    onError: (error) => {
+      toast.error(
+        error.data?.zodError?.fieldErrors?.text?.[0] || "Somthing went wrong",
+      )
     },
   })
 
@@ -63,9 +69,7 @@ export default function CreatItem() {
             }}
             className="flex flex-col gap-4 px-4"
           >
-            {text.length > 255 && (
-              <div className="text-red-400">too long, </div>
-            )}
+            {text.length > 3000 && <div className="text-red-400">too long</div>}
             <textarea
               ref={textareaRef}
               className="w-full rounded-lg px-4 py-2 text-black shadow-md"
