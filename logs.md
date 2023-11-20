@@ -100,3 +100,10 @@ Get delete all working.
 - BUG: Somthing wrong when fetching text.getAll, if the data includes a long string of number, the app will freeze, and not able to be reload, revisit, only way is to delete the row in the backend to fix it.
     - with text.getAll, both useQuery, and utils.invalidate are affected.
     - Only the boardId with long string of numbers will be affect, other boardId will not freeze. 
+
+
+### 1120
+- Change text content from varchar to text type in schema
+-  Add shortcut to "ENTER" key to BoardManager.tsx to start the app, and starting state to show loading spinner
+-  Fix LoadingSpinner Tailwind parsing issue, dynamic size is not possible because the classname is produced only at compile time. At runtime, different size is missing in style sheet. Result to just let it resize on itself.
+- remove QRCode url text display

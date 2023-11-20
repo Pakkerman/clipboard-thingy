@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useCallback } from "react"
+import React, { useEffect, useRef } from "react"
 import { BsBackspace } from "react-icons/bs"
 import { CiRedo } from "react-icons/ci"
 import { useBoardContext } from "../context/BoardContext"
@@ -10,15 +10,21 @@ type PinPadProps = {
   setPin: React.Dispatch<React.SetStateAction<string>>
 }
 export function PasscodeInput(props: PinPadProps) {
+  const inputRef = useRef<HTMLInputElement>(null)
   const { locked } = useBoardContext()
   const { pin, setPin } = props
+
+  useEffect(() => {
+    if (inputRef.current) inputRef.current.focus()
+  }, [inputRef.current])
 
   return (
     <div className="flex h-full flex-col justify-center gap-2 bg-orange-50">
       <div className="flex flex-col justify-center gap-2 rounded-xl border border-black/10 p-4 shadow-inner shadow-orange-950/40">
         <h3>Please Enter Pin</h3>
         <input
-          className={`rounded-xl border border-black/20 bg-orange-50 p-1 text-center accent-orange-500 shadow-inner shadow-orange-950/40 transition dark:text-orange-950 ${
+          ref={inputRef}
+          className={`rounded-xl border border-black/20 bg-orange-50 p-1 text-center caret-transparent accent-orange-500 shadow-inner shadow-orange-950/40 transition dark:text-orange-950 ${
             locked && pin.length === 4 && "border-red-400 bg-red-200"
           }`}
           type="text"
