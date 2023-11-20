@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useState } from "react"
+import React from "react"
 import Link from "next/link"
-import { useParams, useSearchParams } from "next/navigation"
 
 import Clipboard from "~/app/_components/Clipboard"
 import CreateItem from "../_components/CreateItem"
@@ -15,13 +14,10 @@ import QRCode from "../_components/QRCode"
 import { useBoardContext } from "../context/BoardContext"
 import { PasscodeInput } from "../_components/PinInput"
 import { LoadingSpinner } from "../_components/LoadingSpinner"
+import PinManager from "../_components/PinManager"
 
 export default function Page() {
-  const { id } = useParams()
-  const [changePinInput, setChangePinInput] = useState("")
-  const [showPinInput, setShowPinInput] = useState(false)
-  const { boardData, loading, pin, setPin, locked, handleUpdatePin } =
-    useBoardContext()
+  const { loading, pin, setPin, locked } = useBoardContext()
 
   if (loading) return <LoadingSpinner />
   if (locked) return <PasscodeInput pin={pin} setPin={setPin} />
@@ -32,7 +28,8 @@ export default function Page() {
       <Nav />
       <CreateItem />
       <div className="flex w-[332px] flex-col  items-center justify-center gap-2 py-4 text-center text-sm text-gray-600">
-        <p>This is board #{id}</p>
+        <PinManager />
+        {/* <p>This is board #{id}</p>
         {!boardData?.pin && <p>Set pin to claim this board</p>}
         <button
           className="rounded-md border-[0.5px] border-black/20 px-4 py-2"
@@ -56,7 +53,7 @@ export default function Page() {
         <p>
           If you don't see your content, make sure your devices are on the same
           board number
-        </p>
+        </p> */}
         <div className="flex gap-2">
           <Link
             className="flex select-none items-center gap-1 rounded-md border border-orange-400/80 px-2 py-1 text-sm transition hover:bg-orange-400 hover:text-orange-950 active:translate-y-[2px]"

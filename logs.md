@@ -108,5 +108,6 @@ Get delete all working.
 -  Fix LoadingSpinner Tailwind parsing issue, dynamic size is not possible because the classname is produced only at compile time. At runtime, different size is missing in style sheet. Result to just let it resize on itself.
 - remove QRCode url text display
 - Auto focus on input field when pinInput page is presented.
+- Added react-device-detect. Change auto focus on input in PinInput.tsx to only do this on desktop
 
 
