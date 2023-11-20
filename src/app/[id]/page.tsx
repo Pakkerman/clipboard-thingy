@@ -23,7 +23,7 @@ export default function Page() {
   const { boardData, loading, pin, setPin, locked, handleUpdatePin } =
     useBoardContext()
 
-  if (loading) return <LoadingSpinner size={16} />
+  if (loading) return <LoadingSpinner />
   if (locked) return <PasscodeInput pin={pin} setPin={setPin} />
 
   return (

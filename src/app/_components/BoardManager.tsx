@@ -36,7 +36,7 @@ export default function BoardManager() {
         className="flex h-12 w-full items-center justify-center rounded-xl border border-orange-400 bg-orange-400 p-2 text-center text-lg text-orange-950  shadow-md shadow-orange-950/30 transition hover:border-orange-500 hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950 disabled:opacity-60 dark:shadow-orange-500/40"
         onClick={handleStart}
       >
-        {loading || starting ? <LoadingSpinner size={4} /> : "Start"}
+        {loading || starting ? <LoadingSpinner /> : "Start"}
       </button>
       <br />
       <p className="text-center">Board ID</p>

@@ -107,3 +107,6 @@ Get delete all working.
 -  Add shortcut to "ENTER" key to BoardManager.tsx to start the app, and starting state to show loading spinner
 -  Fix LoadingSpinner Tailwind parsing issue, dynamic size is not possible because the classname is produced only at compile time. At runtime, different size is missing in style sheet. Result to just let it resize on itself.
 - remove QRCode url text display
+- Auto focus on input field when pinInput page is presented.
+
+
