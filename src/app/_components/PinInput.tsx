@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react"
 import { BsBackspace } from "react-icons/bs"
 import { CiRedo } from "react-icons/ci"
 import { useBoardContext } from "../context/BoardContext"
+import { isDesktop } from "react-device-detect"
 
 type PinPadProps = {
   pin: string
@@ -15,6 +16,7 @@ export function PasscodeInput(props: PinPadProps) {
   const { pin, setPin } = props
 
   useEffect(() => {
+    if (!isDesktop) return
     if (inputRef.current) inputRef.current.focus()
   }, [inputRef.current])
 
