@@ -21,7 +21,7 @@ export const textRouter = createTRPCRouter({
       // simulate a slow db call
       // await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      await ctx.db.insert(texts).values({
+      return await ctx.db.insert(texts).values({
         content: input.text,
         boardId: input.boardId,
       })

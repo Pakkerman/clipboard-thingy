@@ -97,4 +97,6 @@ Get delete all working.
 ### 1117
 - Emoji support for text ?
 - [x] TODO: Increase text limit, 256 is too small, increase to 3000
-- 
+- BUG: Somthing wrong when fetching text.getAll, if the data includes a long string of number, the app will freeze, and not able to be reload, revisit, only way is to delete the row in the backend to fix it.
+    - with text.getAll, both useQuery, and utils.invalidate are affected.
+    - Only the boardId with long string of numbers will be affect, other boardId will not freeze. 

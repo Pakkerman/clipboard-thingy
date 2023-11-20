@@ -3,6 +3,7 @@
 
 import { sql } from "drizzle-orm"
 import {
+  text,
   bigint,
   index,
   mysqlTableCreator,
@@ -23,7 +24,7 @@ export const texts = mysqlTable("text", {
   id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
 
   boardId: varchar("boardId", { length: 16 }),
-  content: varchar("content", { length: 3000 }),
+  content: text("content"),
 
   createdAt: timestamp("created_at")
     .default(sql`CURRENT_TIMESTAMP`)

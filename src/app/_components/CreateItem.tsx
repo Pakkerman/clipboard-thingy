@@ -73,6 +73,7 @@ export default function CreatItem() {
               onChange={(e) => setText(e.target.value)}
               placeholder="Type Something"
               value={text}
+              minLength={1}
               cols={30}
               rows={
                 textareaRef.current?.scrollHeight
