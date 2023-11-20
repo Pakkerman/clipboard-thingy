@@ -1,13 +1,11 @@
 import React from "react"
 
-type LoadingSpinnerProps = { size?: number }
-export function LoadingSpinner({ size = 4 }: LoadingSpinnerProps) {
-  const sizeClassName = `h-${size} w-${size}`
+export function LoadingSpinner() {
   return (
-    <div role="status">
+    <div className="h-[min(100%,100px)] w-[min(100%,100px)]" role="status">
       <svg
         aria-hidden="true"
-        className={`${sizeClassName} animate-spin fill-orange-600 text-orange-100 dark:text-gray-600`}
+        className="h-full w-full animate-spin fill-orange-600 text-orange-100 dark:text-gray-600 "
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
