@@ -1,12 +1,14 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import useLocalBoardData from "../hooks/useLocalBoardData"
 import { setLocalData } from "../lib/localStorageHelpers"
 import { LoadingSpinner } from "./LoadingSpinner"
 import { useRouter } from "next/navigation"
+import { isDesktop } from "react-device-detect"
 
 export default function BoardManager() {
+  const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const { inputId, setInputId, loading } = useLocalBoardData()
   const [starting, setStarting] = useState(false)
@@ -26,6 +28,10 @@ export default function BoardManager() {
   useEffect(() => {
     if (loading) return
     window.addEventListener("keydown", handleKeyPress)
+
+    if (!inputRef.current || !isDesktop) return
+    inputRef.current.focus()
+
     return () => window.removeEventListener("keydown", handleKeyPress)
   }, [loading])
 
@@ -41,6 +47,7 @@ export default function BoardManager() {
       <br />
       <p className="text-center">Board ID</p>
       <input
+        ref={inputRef}
         type="text"
         className="rounded-xl bg-orange-50 p-2 text-center accent-orange-500 shadow-inner shadow-orange-950/40 dark:text-orange-950"
         value={inputId}

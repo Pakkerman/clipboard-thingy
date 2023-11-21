@@ -109,5 +109,7 @@ Get delete all working.
 - remove QRCode url text display
 - Auto focus on input field when pinInput page is presented.
 - Added react-device-detect. Change auto focus on input in PinInput.tsx to only do this on desktop
+- Extract change pin logics in [id]/page.tsx to PinManager.tsx'
 
-
+### 1121
+- Auto focus on boardId input in when in desktop when visit the front page
