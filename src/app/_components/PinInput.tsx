@@ -1,10 +1,12 @@
 "use client"
 
 import React, { useEffect, useRef } from "react"
-import { BsBackspace } from "react-icons/bs"
-import { CiRedo } from "react-icons/ci"
 import { useBoardContext } from "../context/BoardContext"
 import { isDesktop } from "react-device-detect"
+
+import { BsBackspace } from "react-icons/bs"
+import { CiRedo } from "react-icons/ci"
+import { SlLock, SlLockOpen } from "react-icons/sl"
 
 type PinPadProps = {
   pin: string
@@ -21,24 +23,38 @@ export function PasscodeInput(props: PinPadProps) {
   }, [inputRef.current])
 
   return (
-    <div className="flex h-full flex-col justify-center gap-2 bg-orange-50">
-      <div className="flex flex-col justify-center gap-2 rounded-xl border border-black/10 p-4 shadow-inner shadow-orange-950/40">
-        <h3>Please Enter Pin</h3>
-        <input
-          ref={inputRef}
-          className={`rounded-xl border border-black/20 bg-orange-50 p-1 text-center caret-transparent accent-orange-500 shadow-inner shadow-orange-950/40 transition dark:text-orange-950 ${
-            locked && pin.length === 4 && "border-red-400 bg-red-200"
-          }`}
-          type="text"
-          placeholder="____"
-          value={pin}
-          maxLength={4}
-          minLength={4}
-          onChange={(event) => setPin(event.target.value)}
-        />
-        <NumberPad setPin={setPin} />
+    <section className="flex h-[100dvh] flex-col items-center justify-around gap-2 ">
+      <div className="flex h-[50%] w-[70%] flex-col items-center justify-center gap-6">
+        <div className="flex h-44 w-44 items-center justify-center rounded-full shadow-inner shadow-orange-950/40 ">
+          <SlLock
+            className="text-orange-800 shadow-orange-950/40 drop-shadow-md"
+            size={100}
+          />
+        </div>
+        <p className="text-center text-sm">
+          This board is protected, please input the correct pin if you are the
+          owner of this board.
+        </p>
       </div>
-    </div>
+      <input
+        ref={inputRef}
+        className={`w-[232px] rounded-xl border border-black/20 bg-orange-50 p-1 text-center text-3xl caret-transparent accent-orange-500 shadow-inner shadow-orange-950/40 transition dark:text-orange-950 ${
+          locked && pin.length === 4 && "border-red-400 bg-red-200"
+        }`}
+        type="text"
+        placeholder="_ _ _ _"
+        value={pin}
+        maxLength={4}
+        minLength={4}
+        onChange={(event) => setPin(event.target.value)}
+      />
+      <div className="flex h-[50%] flex-col items-center justify-center">
+        <div className="flex flex-col justify-center gap-2 rounded-xl border border-black/10 bg-orange-50 p-4 shadow-inner shadow-orange-950/40 ">
+          <h3>Please Enter Pin</h3>
+          <NumberPad setPin={setPin} />
+        </div>
+      </div>
+    </section>
   )
 }
 
@@ -52,7 +68,7 @@ function NumberPad(props: NumberPadProps) {
   const handleReset = () => setPin("")
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex w-[200px] flex-col gap-2">
       <div className="flex gap-2 ">
         <NumberPadButton number="1" handleClick={handleClick} />
         <NumberPadButton number="2" handleClick={handleClick} />

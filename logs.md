@@ -113,3 +113,4 @@ Get delete all working.
 
 ### 1121
 - Auto focus on boardId input in when in desktop when visit the front page
+- Update PinInput page, Added instructions, move down keyboard for mobile usage
