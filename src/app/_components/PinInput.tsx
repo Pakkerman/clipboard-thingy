@@ -23,19 +23,18 @@ export function PasscodeInput(props: PinPadProps) {
   }, [inputRef.current])
 
   return (
-    <section className="flex h-[90vh] w-[min(90vw,500px)] flex-col items-center justify-around gap-2 rounded-xl text-orange-950 shadow-inner shadow-orange-950/40">
-      <div className="flex h-[50%] w-[70%] flex-col items-center justify-center gap-6">
-        <div className="flex h-44 w-44 items-center justify-center rounded-full shadow-md shadow-orange-950/40 ">
-          <SlLock
-            className="text-orange-800 shadow-orange-950/40 drop-shadow-md"
-            size={100}
-          />
-        </div>
-        <p className="text-center text-sm">
-          This board is protected, please input the correct pin if you are the
-          owner of this board.
-        </p>
+    <section className="flex h-[max(95svh,500px)] w-[min(90vw,500px)] flex-col items-center justify-around gap-2 rounded-xl text-orange-950 shadow-inner shadow-orange-950/40">
+      <div className="flex h-36 w-36 items-center justify-center rounded-full shadow-md shadow-orange-950/40 ">
+        <SlLock
+          className="text-orange-800 shadow-orange-950/40 drop-shadow-md"
+          size={75}
+        />
       </div>
+      <p className="px-8 text-center text-sm">
+        This board is protected, please input the correct pin if you are the
+        owner of this board.
+      </p>
+      <p>Please Enter Pin</p>
       <input
         ref={inputRef}
         className={`w-[232px] rounded-xl border border-black/20 bg-orange-50 p-1 text-center text-3xl caret-transparent accent-orange-500 shadow-inner shadow-orange-950/40 transition dark:text-orange-950 ${
@@ -48,9 +47,8 @@ export function PasscodeInput(props: PinPadProps) {
         minLength={4}
         onChange={(event) => setPin(event.target.value)}
       />
-      <div className="flex h-[50%] flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center">
         <div className="flex flex-col justify-center gap-2 rounded-xl border border-black/10 bg-orange-50 p-4 shadow-md shadow-orange-950/40 ">
-          <h3>Please Enter Pin</h3>
           <NumberPad setPin={setPin} />
         </div>
       </div>
