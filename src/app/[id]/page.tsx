@@ -49,6 +49,7 @@ export default function Page() {
       </div>
 
       <QRCode />
+      <br />
       <Footer />
     </>
   )

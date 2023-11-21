@@ -23,9 +23,9 @@ export function PasscodeInput(props: PinPadProps) {
   }, [inputRef.current])
 
   return (
-    <section className="flex h-[100dvh] flex-col items-center justify-around gap-2 ">
+    <section className="flex h-[90vh] w-[min(90vw,500px)] flex-col items-center justify-around gap-2 rounded-xl text-orange-950 shadow-inner shadow-orange-950/40">
       <div className="flex h-[50%] w-[70%] flex-col items-center justify-center gap-6">
-        <div className="flex h-44 w-44 items-center justify-center rounded-full shadow-inner shadow-orange-950/40 ">
+        <div className="flex h-44 w-44 items-center justify-center rounded-full shadow-md shadow-orange-950/40 ">
           <SlLock
             className="text-orange-800 shadow-orange-950/40 drop-shadow-md"
             size={100}
@@ -49,7 +49,7 @@ export function PasscodeInput(props: PinPadProps) {
         onChange={(event) => setPin(event.target.value)}
       />
       <div className="flex h-[50%] flex-col items-center justify-center">
-        <div className="flex flex-col justify-center gap-2 rounded-xl border border-black/10 bg-orange-50 p-4 shadow-inner shadow-orange-950/40 ">
+        <div className="flex flex-col justify-center gap-2 rounded-xl border border-black/10 bg-orange-50 p-4 shadow-md shadow-orange-950/40 ">
           <h3>Please Enter Pin</h3>
           <NumberPad setPin={setPin} />
         </div>
