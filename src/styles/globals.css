@@ -14,3 +14,20 @@ body * {
 .pre {
   @apply bg-red-400 bg-opacity-30  sm:bg-blue-400 sm:bg-opacity-30 md:bg-green-400  md:bg-opacity-30 lg:bg-cyan-400 lg:bg-opacity-30
 }
+
+
+
+.animate-spin-3s {
+  animation: spin 3s linear infinite;
+}
+.animate-spin-5s {
+  animation: spin 5s linear infinite;
+}
+
+
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

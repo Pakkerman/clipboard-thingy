@@ -115,3 +115,6 @@ Get delete all working.
 - Auto focus on boardId input in when in desktop when visit the front page
 - Update PinInput page, Added instructions, move down keyboard for mobile usage
 - Change pinInput layout, change footer position
+
+### 1122
+- Add animation to PinInput.
