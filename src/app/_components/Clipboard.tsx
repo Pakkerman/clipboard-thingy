@@ -11,7 +11,7 @@ export default function Clipboard() {
   const [animationParent] = useAutoAnimate()
 
   return (
-    <section className=" w-[90%] max-w-[375px] rounded-xl bg-stone-50 shadow-inner shadow-black/50">
+    <section className=" w-full grow rounded-xl bg-stone-50 shadow-inner shadow-black/50">
       <ul
         ref={animationParent}
         className="flex h-[450px] flex-col items-center gap-2 overflow-y-scroll rounded-xl border-orange-400 p-4"

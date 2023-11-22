@@ -24,9 +24,11 @@ export default function Page() {
 
   return (
     <>
-      <Clipboard />
-      <Nav />
-      <CreateItem />
+      <div className="flex h-[100svh] w-[min(90%,375px)] flex-col items-center justify-center pt-5">
+        <Clipboard />
+        <Nav />
+        <CreateItem />
+      </div>
       <div className="flex w-[332px] flex-col  items-center justify-center gap-2 py-4 text-center text-sm text-gray-600">
         <PinManager />
         <div className="flex gap-2">
