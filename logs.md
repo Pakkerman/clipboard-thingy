@@ -119,3 +119,4 @@ Get delete all working.
 ### 1122
 - Add animation to PinInput.
 - Change clipboard and create and delete buttons to fit 100svh, so there is no layout shift, and make sure that all operation is on one view
+- Move bg gradient to global, change secondhalf of the id/page to dvh

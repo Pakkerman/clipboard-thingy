@@ -29,7 +29,7 @@ export default function Page() {
         <Nav />
         <CreateItem />
       </div>
-      <div className="pre flex h-[max(400px,100svh)] w-[clamp(300px,90%,375px)] flex-col  items-center justify-center gap-2 py-4 text-center text-sm text-gray-600">
+      <div className="flex h-[max(400px,100vh)] w-[clamp(300px,90%,375px)] flex-col  items-center justify-center gap-2 py-4 text-center text-sm text-gray-600 transition-all">
         <PinManager />
         <div className="flex gap-2">
           <Link
