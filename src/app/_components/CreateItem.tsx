@@ -80,9 +80,6 @@ export default function CreatItem() {
                   ? 1 + (textareaRef.current?.scrollHeight! - 40) / 24
                   : 2
               }
-              onFocus={() =>
-                textareaRef.current?.scrollIntoView({ behavior: "smooth" })
-              }
             />
             <button
               type="submit"
