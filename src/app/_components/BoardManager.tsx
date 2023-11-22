@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import useLocalBoardData from "../hooks/useLocalBoardData"
 import { setLocalData } from "../lib/localStorageHelpers"
 import { LoadingSpinner } from "./LoadingSpinner"
@@ -14,12 +14,14 @@ export default function BoardManager() {
   const [starting, setStarting] = useState(false)
 
   const handleKeyPress = (event: KeyboardEvent) => {
-    if (loading) return
-    if (inputId.length === 0) return
-    if (event.key === "Enter") handleStart()
+    if (event.key !== "Enter") return
+    const startButton: HTMLButtonElement | null =
+      document.querySelector("#start")
+    if (startButton) startButton.click()
   }
 
   const handleStart = () => {
+    console.log(inputId)
     router.push("/" + inputId)
     setLocalData("boardId", inputId)
     setStarting(true)
@@ -38,6 +40,7 @@ export default function BoardManager() {
   return (
     <section className="flex flex-col gap-4 py-6 font-chakraPetch">
       <button
+        id="start"
         disabled={loading || starting}
         className="flex h-12 w-full items-center justify-center rounded-xl border border-orange-400 bg-orange-400 p-2 text-center text-lg text-orange-950  shadow-md shadow-orange-950/30 transition hover:border-orange-500 hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950 disabled:opacity-60 dark:shadow-orange-500/40"
         onClick={handleStart}

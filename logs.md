@@ -120,3 +120,4 @@ Get delete all working.
 - Add animation to PinInput.
 - Change clipboard and create and delete buttons to fit 100svh, so there is no layout shift, and make sure that all operation is on one view
 - Move bg gradient to global, change secondhalf of the id/page to dvh
+- Fix when press enter in front page, app start with the id that is in localStorage, not with user inputed due to state of the inputId is first load into handleKeyPress with localStorage, after inputed by the user, the function still have the old id when fired. Routed the handleKeypress directly to click() the button instead to fix this. 
