@@ -54,7 +54,7 @@ export default function CreatItem() {
 
   return (
     <section
-      className="h-min min-h-[150px] w-full font-chakraPetch"
+      className="h-min min-h-[150px] w-full font-chakraPetch transition-all"
       ref={animationParent}
     >
       {!locked && tab === "text" && (
@@ -75,11 +75,7 @@ export default function CreatItem() {
               value={text}
               minLength={1}
               cols={30}
-              rows={
-                textareaRef.current?.scrollHeight
-                  ? 1 + (textareaRef.current?.scrollHeight! - 40) / 24
-                  : 2
-              }
+              rows={calculateTextAreaHeight(textareaRef.current?.scrollHeight)}
             />
             <button
               type="submit"
@@ -100,4 +96,12 @@ export default function CreatItem() {
       <ClearAllButton />
     </section>
   )
+}
+
+function calculateTextAreaHeight(scrollHeight: number | undefined): number {
+  if (!scrollHeight) return 2
+
+  const rows = Math.floor(1 + (scrollHeight - 40) / 24)
+  if (rows > 7) return 7
+  else return rows
 }
