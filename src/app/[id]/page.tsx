@@ -24,12 +24,12 @@ export default function Page() {
 
   return (
     <>
-      <div className="flex h-[100svh] w-[min(90%,375px)] flex-col items-center justify-center pt-5">
+      <div className="flex h-[max(400px,100svh)] w-[clamp(300px,90%,375px)] flex-col items-center justify-center pt-5">
         <Clipboard />
         <Nav />
         <CreateItem />
       </div>
-      <div className="flex w-[332px] flex-col  items-center justify-center gap-2 py-4 text-center text-sm text-gray-600">
+      <div className="pre flex h-[max(400px,100svh)] w-[clamp(300px,90%,375px)] flex-col  items-center justify-center gap-2 py-4 text-center text-sm text-gray-600">
         <PinManager />
         <div className="flex gap-2">
           <Link
@@ -48,11 +48,11 @@ export default function Page() {
             Copy board link <FiCopy />
           </button>
         </div>
-      </div>
 
-      <QRCode />
-      <br />
-      <Footer />
+        <QRCode />
+        <br />
+        <Footer />
+      </div>
     </>
   )
 }

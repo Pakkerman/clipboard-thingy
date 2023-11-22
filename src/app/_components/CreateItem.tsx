@@ -54,7 +54,7 @@ export default function CreatItem() {
 
   return (
     <section
-      className="h-min min-h-[150px] w-[350px] font-chakraPetch"
+      className="pre h-min min-h-[150px] w-full font-chakraPetch"
       ref={animationParent}
     >
       {!locked && tab === "text" && (
