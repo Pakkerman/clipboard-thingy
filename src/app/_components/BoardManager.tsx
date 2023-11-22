@@ -57,6 +57,7 @@ export default function BoardManager() {
         maxLength={6}
         onChange={(event) => setInputId(event.target.value)}
       />
+      {/* dev testing button to reset localStorage */}
       <button
         className="border-2 "
         onClick={() => localStorage.removeItem("clipboard")}

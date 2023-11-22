@@ -24,12 +24,12 @@ export default function Page() {
 
   return (
     <>
-      <div className="flex h-[max(400px,100svh)] w-[clamp(300px,90%,375px)] flex-col items-center justify-center pt-5">
+      <div className="flex h-[max(400px,100svh)] w-[clamp(300px,90%,375px)] snap-start snap-always flex-col items-center justify-center pt-5">
         <Clipboard />
         <Nav />
         <CreateItem />
       </div>
-      <div className="flex h-[max(400px,100vh)] w-[clamp(300px,90%,375px)] flex-col  items-center justify-center gap-2 py-4 text-center text-sm text-gray-600 transition-all">
+      <div className="flex h-[max(400px,100vh)] w-[clamp(300px,90%,375px)] snap-start  snap-always flex-col items-center justify-center gap-2 py-4 text-center text-sm text-gray-600 transition-all">
         <PinManager />
         <div className="flex gap-2">
           <Link
