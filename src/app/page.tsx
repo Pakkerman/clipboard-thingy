@@ -6,7 +6,7 @@ import { ThemeButton } from "./_components/buttons/ThemeButton"
 
 export default async function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center ">
+    <main className="flex h-[100dvh] flex-col items-center justify-center transition">
       <h1 className="relative select-none bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text py-20 font-chakraPetch text-[min(3.75rem,15vw)] font-bold uppercase italic tracking-tight text-transparent ">
         Clipbroker
       </h1>
