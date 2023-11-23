@@ -127,3 +127,4 @@ Get delete all working.
 - Fix faulty regex for url checker, that will cause browser freeze when trying to check a long string.
 - Set overflow scroll on text item
 - Style buttons on text and file list items to match, move delete button to the right-top of the text item.
+- Remove locked condition in CreateItem.tsx, locked is now handle with clipboard, children components dont need it

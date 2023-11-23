@@ -9,7 +9,6 @@ import Uploadthing from "./Uploadthing"
 import ClearAllButton from "./buttons/ClearAllButton"
 
 import { useAutoAnimate } from "@formkit/auto-animate/react"
-import { useBoardContext } from "../context/BoardContext"
 import { BiCommand } from "react-icons/bi"
 import { IoReturnDownBackSharp } from "react-icons/io5"
 import toast from "react-hot-toast"
@@ -21,7 +20,6 @@ export default function CreatItem() {
   const [text, setText] = useState("")
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const [animationParent] = useAutoAnimate()
-  const { locked } = useBoardContext()
 
   const { mutate, isLoading } = api.text.create.useMutation({
     onMutate: () => {
@@ -57,7 +55,7 @@ export default function CreatItem() {
       className="h-min min-h-[150px] w-full font-chakraPetch transition-all"
       ref={animationParent}
     >
-      {!locked && tab === "text" && (
+      {tab === "text" && (
         <>
           <form
             onSubmit={(e) => {
@@ -92,7 +90,7 @@ export default function CreatItem() {
           </form>
         </>
       )}
-      {!locked && tab === "file" && <Uploadthing />}
+      {tab === "file" && <Uploadthing />}
       <ClearAllButton />
     </section>
   )

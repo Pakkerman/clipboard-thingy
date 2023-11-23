@@ -2,16 +2,12 @@
 
 import React from "react"
 import { useNavContext } from "../context/NavContext"
-import { useBoardContext } from "../context/BoardContext"
 
 export default function Nav() {
   const { tab, setTab } = useNavContext()
-  const { locked } = useBoardContext()
-
-  if (locked) return <></>
 
   return (
-    <nav className="py-4">
+    <nav className="py-3">
       <ul className="flex w-[325px] justify-between gap-2">
         <li className="grow">
           <button
