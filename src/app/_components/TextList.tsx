@@ -47,7 +47,7 @@ export function TextList() {
       {data?.map((item) => (
         <li
           key={item.id}
-          className={`flex min-h-min w-full cursor-pointer items-center justify-between gap-2 rounded-xl border-[0.5px] border-black/50  p-4 shadow-black/20 transition hover:shadow-md active:shadow-inner ${
+          className={`flex min-h-min w-full cursor-pointer items-center justify-between gap-2 rounded-xl border-[0.5px] border-black/50 p-4 shadow-black/20 transition hover:shadow-md active:shadow-inner ${
             selected === item.id
               ? "shadow-inner hover:shadow-inner"
               : "shadow-none"
@@ -57,7 +57,7 @@ export function TextList() {
           <p className="max-h-[150px] overflow-y-scroll break-all">
             {item.content}
           </p>
-          <div className="flex flex-col gap-2">
+          <div className="flex h-full flex-col gap-2 ">
             <DeleteButton id={item.id} />
             <LinkButton url={item.content} />
           </div>
@@ -74,7 +74,7 @@ function LinkButton({ url }: LinkButtonProps) {
 
   return (
     <button
-      className="h-6 w-6 rounded-lg border hover:border-black/60"
+      className="h-6 w-6 rounded-lg border border-black/20 hover:border-orange-400 "
       onClick={(event) => {
         event.stopPropagation()
         window.open(url, "_blank")
@@ -97,7 +97,7 @@ function DeleteButton({ id }: DeleteButtonProps) {
 
   return (
     <button
-      className="h-6 w-6 rounded-lg border border-black/20 hover:border-orange-400 "
+      className="h-6 w-6 rounded-lg border border-black/20 hover:border-orange-400"
       onClick={(event) => {
         event.stopPropagation()
         mutate({ id })

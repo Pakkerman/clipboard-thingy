@@ -52,7 +52,7 @@ export function FileList() {
       {data?.map((item) => (
         <li
           key={item.id}
-          className="flex min-h-[90px] w-full cursor-pointer items-center justify-center gap-2 rounded-xl border p-4 shadow-black/20 transition hover:shadow-md active:shadow-inner"
+          className="flex min-h-[90px] w-full cursor-pointer items-center justify-center gap-2 rounded-xl border p-4 shadow-orange-950/40 transition hover:shadow-md active:shadow-inner"
         >
           <div className="flex grow flex-col gap-2">
             <div className="flex h-8 items-center justify-between rounded-lg border">
@@ -89,7 +89,7 @@ export function DeleteButton(props: DeleteButtonProps) {
 
   return (
     <button
-      className="flex h-6 grow items-center justify-center gap-1 rounded-lg border pl-1 pt-[1px] hover:border-black/60"
+      className="flex h-6 grow items-center justify-center gap-1 rounded-lg border border-black/20 pl-1 pt-[1px] hover:border-black/60 hover:border-orange-400 "
       onClick={handleClick}
     >
       <span className="text-sm ">Delete</span>
@@ -102,7 +102,7 @@ type DownloadFileButtonProps = { url: string }
 export function DownloadButton(props: DownloadFileButtonProps) {
   return (
     <button
-      className="flex h-6 grow items-center justify-center gap-1 rounded-lg border pt-[1px] hover:border-black/60"
+      className="flex h-6 grow items-center justify-center gap-1 rounded-lg border border-black/20 pt-[1px] hover:border-black/60 hover:border-orange-400 "
       onClick={() => {
         toast.loading("Getting file...", { id: "fetching file" })
         fetch(props.url, {
