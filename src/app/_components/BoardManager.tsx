@@ -21,7 +21,6 @@ export default function BoardManager() {
   }
 
   const handleStart = () => {
-    console.log(inputId)
     router.push("/" + inputId)
     setLocalData("boardId", inputId)
     setStarting(true)

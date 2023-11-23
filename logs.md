@@ -122,3 +122,7 @@ Get delete all working.
 - Move bg gradient to global, change secondhalf of the id/page to dvh
 - Fix when press enter in front page, app start with the id that is in localStorage, not with user inputed due to state of the inputId is first load into handleKeyPress with localStorage, after inputed by the user, the function still have the old id when fired. Routed the handleKeypress directly to click() the button instead to fix this. 
 - Limit rows of textarea heigh to allow to grow
+
+### 1123
+- Fix faulty regex for url checker, that will cause browser freeze when trying to check a long string.
+
