@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect } from "react"
 import Link from "next/link"
 
 import Clipboard from "~/app/_components/Clipboard"
@@ -22,6 +22,10 @@ export default function Page() {
   if (loading) return <LoadingSpinner />
   if (locked) return <PasscodeInput pin={pin} setPin={setPin} />
 
+  useEffect(() => {
+    window.scrollTo({ behavior: "smooth", top: 800 })
+  }, [])
+
   return (
     <>
       <div className="flex h-[max(400px,100svh)]  w-[clamp(300px,90%,375px)] flex-col items-center justify-center pt-5">
@@ -29,17 +33,18 @@ export default function Page() {
         <Nav />
         <CreateItem />
       </div>
-      <div className="flex h-[max(400px,100vh)] w-[clamp(300px,90%,375px)] flex-col  items-center justify-center gap-2 py-4 text-center text-sm text-gray-600 transition-all">
+      <div className="flex h-[max(400px,100vh)] w-[clamp(300px,90%,375px)] flex-col  items-center gap-2 py-4 text-center text-sm text-gray-600 transition-all">
+        <QRCode />
         <PinManager />
         <div className="flex gap-2">
           <Link
-            className="flex select-none items-center gap-1 rounded-md border border-orange-400/80 px-2 py-1 text-sm transition hover:bg-orange-400 hover:text-orange-950 active:translate-y-[2px]"
+            className="text-md flex select-none items-center gap-1 rounded-md border border-orange-400/80 px-2 py-1 transition hover:bg-orange-400 hover:text-orange-950 active:translate-y-[2px]"
             href="/"
           >
             Go home <FiHome />
           </Link>
           <button
-            className="flex select-none items-center gap-1 rounded-md border border-orange-400/80 px-2 py-1 text-sm transition hover:bg-orange-400 hover:text-orange-950 active:translate-y-[2px]"
+            className="text-md flex select-none items-center gap-1 rounded-md border border-orange-400/80 px-2 py-1 transition hover:bg-orange-400 hover:text-orange-950 active:translate-y-[2px]"
             onClick={async () => {
               await navigator.clipboard.writeText(window.location.toString())
               toast.success("Board Id copied!")
@@ -49,8 +54,6 @@ export default function Page() {
           </button>
         </div>
 
-        <QRCode />
-        <br />
         <Footer />
       </div>
     </>

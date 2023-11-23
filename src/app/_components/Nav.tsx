@@ -7,8 +7,8 @@ export default function Nav() {
   const { tab, setTab } = useNavContext()
 
   return (
-    <nav className="py-3">
-      <ul className="flex w-[325px] justify-between gap-2">
+    <nav className="w-[90%] py-3">
+      <ul className="flex justify-between gap-2">
         <li className="grow">
           <button
             className={`w-full select-none rounded-xl border border-slate-900/20 px-4 

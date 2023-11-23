@@ -13,16 +13,16 @@ export default function QRCode() {
 
   if (url === "") return <></>
   return (
-    <>
-      <br />
+    <div className="shrink-0">
       <QRCodeSVG
         value={url}
-        className="rounded-xl border border-orange-800/20 p-2 shadow-inner shadow-orange-950/20"
+        size={200}
+        className="mx-auto rounded-xl border border-orange-800/20 p-2 shadow-inner shadow-orange-950/40"
       />
       <p className="p-2 text-slate-700">
         Scan to open this board on other devices
       </p>
       {/* <p>{url}</p> */}
-    </>
+    </div>
   )
 }
