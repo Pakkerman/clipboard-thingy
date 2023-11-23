@@ -54,7 +54,9 @@ export function TextList() {
           }`}
           onClick={() => handleCopy(item.id, item.content || "")}
         >
-          <p className="break-all">{item.content}</p>
+          <p className="max-h-[150px] overflow-y-scroll break-all">
+            {item.content}
+          </p>
           <div className="flex flex-col gap-2">
             <DeleteButton id={item.id} />
             <LinkButton url={item.content} />
