@@ -128,3 +128,9 @@ Get delete all working.
 - Set overflow scroll on text item
 - Style buttons on text and file list items to match, move delete button to the right-top of the text item.
 - Remove locked condition in CreateItem.tsx, locked is now handle with clipboard, children components dont need it
+
+### 1124
+- Redesign layout to fit with mobile nav, using h-200vh to give the 2 screen of height, and in that with 2 sections that each is h-100vh, and in those, having another div for 100dvh for scaling the elements inside correctly, while prevent the whole page height shifting while scrolling.
+- [ ] TODO: Overflow scroll indicator for text list items.
+- [ ] TODO: Scroll snap for id/page
+- 

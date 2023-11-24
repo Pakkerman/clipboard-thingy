@@ -23,35 +23,37 @@ export function PasscodeInput(props: PinPadProps) {
   }, [inputRef.current])
 
   return (
-    <section className="flex h-[max(95svh,650px)] w-[min(90vw,500px)] flex-col items-center justify-around gap-2 rounded-xl text-orange-950 shadow-inner shadow-orange-950/40 transition-all">
-      <div className="relative flex h-36 w-36 items-center justify-center rounded-full border-[0.5px] border-orange-300">
-        <div className="animate-spin-3s absolute h-36 w-36 items-center justify-center rounded-full shadow-inner shadow-orange-300/90" />
-        <div className="animate-spin-5s absolute h-36 w-36 items-center justify-center rounded-full shadow-inner shadow-orange-300/90" />
-        <SlLock
-          className="text-orange-950 shadow-orange-950/40 drop-shadow-md"
-          size={75}
+    <section className="h-[max(100dvh,650px)] w-[min(90vw,500px)] py-4">
+      <div className="flex h-full flex-col items-center justify-around gap-2 rounded-xl text-orange-950 shadow-inner shadow-orange-950/40 transition-all">
+        <div className="relative flex h-36 w-36 items-center justify-center rounded-full border-[0.5px] border-orange-300">
+          <div className="animate-spin-3s absolute h-36 w-36 items-center justify-center rounded-full shadow-inner shadow-orange-300/90" />
+          <div className="animate-spin-5s absolute h-36 w-36 items-center justify-center rounded-full shadow-inner shadow-orange-300/90" />
+          <SlLock
+            className="text-orange-950 shadow-orange-950/40 drop-shadow-md"
+            size={75}
+          />
+        </div>
+        <p className="px-8 text-center text-sm">
+          This board is protected, please input the correct pin if you are the
+          owner of this board.
+        </p>
+        <p>Please Enter Pin</p>
+        <input
+          ref={inputRef}
+          className={`w-[232px] rounded-xl border border-black/20 bg-orange-50 p-1 text-center text-3xl caret-transparent accent-orange-500 shadow-inner shadow-orange-950/40 transition dark:text-orange-950 ${
+            locked && pin.length === 4 && "border-red-400 bg-red-200"
+          }`}
+          type="text"
+          placeholder="_ _ _ _"
+          value={pin}
+          maxLength={4}
+          minLength={4}
+          onChange={(event) => setPin(event.target.value)}
         />
-      </div>
-      <p className="px-8 text-center text-sm">
-        This board is protected, please input the correct pin if you are the
-        owner of this board.
-      </p>
-      <p>Please Enter Pin</p>
-      <input
-        ref={inputRef}
-        className={`w-[232px] rounded-xl border border-black/20 bg-orange-50 p-1 text-center text-3xl caret-transparent accent-orange-500 shadow-inner shadow-orange-950/40 transition dark:text-orange-950 ${
-          locked && pin.length === 4 && "border-red-400 bg-red-200"
-        }`}
-        type="text"
-        placeholder="_ _ _ _"
-        value={pin}
-        maxLength={4}
-        minLength={4}
-        onChange={(event) => setPin(event.target.value)}
-      />
-      <div className="flex flex-col items-center justify-center">
-        <div className="flex flex-col justify-center gap-2 rounded-xl border border-black/10 bg-orange-50 p-4 shadow-md shadow-orange-950/40 ">
-          <NumberPad setPin={setPin} />
+        <div className="flex flex-col items-center justify-center">
+          <div className="flex flex-col justify-center gap-2 rounded-xl border border-black/10 bg-orange-50 p-4 shadow-md shadow-orange-950/40 ">
+            <NumberPad setPin={setPin} />
+          </div>
         </div>
       </div>
     </section>

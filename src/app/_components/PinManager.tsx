@@ -11,7 +11,7 @@ export default function PinManager() {
   const { boardData, handleUpdatePin } = useBoardContext()
 
   return (
-    <div className="flex min-h-[150px] grow flex-col items-center justify-center">
+    <div className=" flex min-h-[100px] flex-col items-center justify-center">
       <p>
         This is board <i className="font-bold">{id}</i>
       </p>
@@ -33,7 +33,7 @@ export default function PinManager() {
       {!boardData?.pin && <p>Set pin to claim this board</p>}
       <br />
       <button
-        className="rounded-md border-[0.5px] border-black/20 px-4 py-2"
+        className="w-[90%] rounded-md border-[0.5px] border-black/20 px-4 py-2"
         onClick={() => {
           setShowPinInput(!showPinInput)
           if (showPinInput) handleUpdatePin(changePinInput)

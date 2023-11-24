@@ -13,7 +13,7 @@ export default function QRCode() {
 
   if (url === "") return <></>
   return (
-    <div className="shrink-0">
+    <div className="flex w-full flex-[0_0_450px] flex-col items-center justify-center">
       <QRCodeSVG
         value={url}
         size={200}

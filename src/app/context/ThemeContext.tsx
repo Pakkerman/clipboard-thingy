@@ -7,6 +7,7 @@ import {
   setLocalData,
 } from "../lib/localStorageHelpers"
 
+// TODO: this is loaded before the client is present, move it somewhere else dude
 initLocalStorage()
 
 type Theme = "light" | "dark"

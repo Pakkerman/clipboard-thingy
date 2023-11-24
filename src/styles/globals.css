@@ -16,7 +16,6 @@ body * {
 }
 
 
-
 .animate-spin-3s {
   animation: spin 3s linear infinite;
 }

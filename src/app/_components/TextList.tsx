@@ -60,6 +60,7 @@ export function TextList() {
           <div className="flex h-full flex-col gap-2 ">
             <DeleteButton id={item.id} />
             <LinkButton url={item.content} />
+            {/* <div className="">scroll for more icon</div> */}
           </div>
         </li>
       ))}
