@@ -23,7 +23,7 @@ export function PasscodeInput(props: PinPadProps) {
   }, [inputRef.current])
 
   return (
-    <section className="h-[max(100dvh,650px)] w-[min(90vw,500px)] py-4">
+    <section className="mx-auto h-[max(100dvh,650px)] w-[min(90%,500px)] py-4">
       <div className="flex h-full flex-col items-center justify-around gap-2 rounded-xl text-orange-950 shadow-inner shadow-orange-950/40 transition-all">
         <div className="relative flex h-36 w-36 items-center justify-center rounded-full border-[0.5px] border-orange-300">
           <div className="animate-spin-3s absolute h-36 w-36 items-center justify-center rounded-full shadow-inner shadow-orange-300/90" />
