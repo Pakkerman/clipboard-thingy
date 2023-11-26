@@ -1,14 +1,16 @@
 "use client"
 
 import React from "react"
-import { useNavContext } from "../context/NavContext"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
+
+import { useNavContext } from "../context/NavContext"
+
 import { TextList } from "./TextList"
 import { FileList } from "./FileList"
 
 export default function Clipboard() {
-  const { tab } = useNavContext()
   const [animationParent] = useAutoAnimate()
+  const { tab } = useNavContext()
 
   return (
     // To prevent ul grow beyond the size of 100svh and push buttons out of the screen, that is listed items exceed original given space, depending on the grow property of the parent section tag. Here give a property of h-[100px] to section, let ul have a h-full (h-full will depending on the parent's height) to set to.

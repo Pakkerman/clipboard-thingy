@@ -1,20 +1,23 @@
 "use client"
 
+import React from "react"
+import { api } from "~/trpc/react"
 import { generateComponents } from "@uploadthing/react"
 import type { OurFileRouter } from "~/app/api/uploadthing/core"
-import React from "react"
 import toast from "react-hot-toast"
-import { api } from "~/trpc/react"
+
+import useParamId from "../hooks/useParamId"
 import { useNavContext } from "../context/NavContext"
-import { useParamId } from "../hooks/useParamId"
 
 export const { UploadButton, UploadDropzone, Uploader } =
   generateComponents<OurFileRouter>()
 
 export default function uploadthing() {
   const utils = api.useUtils()
+
   const boardId = useParamId()
   const { setTab } = useNavContext()
+
   const { mutate } = api.file.createRecord.useMutation({
     onSuccess: async () => {
       utils.file.getAll.invalidate()

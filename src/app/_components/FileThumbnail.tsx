@@ -1,12 +1,14 @@
 import React, { useState } from "react"
 import Image from "next/image"
 
-import { HiOutlineDocumentText } from "react-icons/hi"
 import { isImageFile } from "~/app/lib/helpers"
+
+import { HiOutlineDocumentText } from "react-icons/hi"
 
 type FileThumbnailProps = { url: string | null }
 export function FileThumbnail(props: FileThumbnailProps) {
   const [show, setShow] = useState(false)
+
   const isImage = isImageFile(props.url)
 
   return (

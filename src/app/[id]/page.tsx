@@ -1,20 +1,21 @@
 "use client"
 
-import React, { useEffect } from "react"
+import React from "react"
 import Link from "next/link"
+import toast from "react-hot-toast"
 
+import { useBoardContext } from "../context/BoardContext"
+
+import Nav from "../_components/Nav"
 import Clipboard from "~/app/_components/Clipboard"
 import CreateItem from "../_components/CreateItem"
 import Footer from "../_components/Footer"
-import Nav from "../_components/Nav"
-
-import toast from "react-hot-toast"
-import { FiCopy, FiHome } from "react-icons/fi"
 import QRCode from "../_components/QRCode"
-import { useBoardContext } from "../context/BoardContext"
-import { PasscodeInput } from "../_components/PinInput"
-import { LoadingSpinner } from "../_components/LoadingSpinner"
+import PasscodeInput from "../_components/PinInput"
+import LoadingSpinner from "../_components/LoadingSpinner"
 import PinManager from "../_components/PinManager"
+
+import { FiCopy, FiHome } from "react-icons/fi"
 
 export default function Page() {
   const { loading, pin, setPin, locked } = useBoardContext()
@@ -22,9 +23,9 @@ export default function Page() {
   if (loading) return <LoadingSpinner />
   if (locked) return <PasscodeInput pin={pin} setPin={setPin} />
 
-  useEffect(() => {
-    // window.scrollTo({ behavior: "smooth", top: 800 })
-  }, [])
+  // useEffect(() => {
+  //   // window.scrollTo({ behavior: "smooth", top: 800 })
+  // }, [])
 
   return (
     <>

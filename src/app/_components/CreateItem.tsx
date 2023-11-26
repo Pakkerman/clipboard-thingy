@@ -2,24 +2,28 @@
 
 import React, { useEffect, useRef, useState } from "react"
 import { api } from "~/trpc/react"
+import toast from "react-hot-toast"
+import { useAutoAnimate } from "@formkit/auto-animate/react"
 
 import { useNavContext } from "../context/NavContext"
-import { useParamId } from "../hooks/useParamId"
+import useParamId from "../hooks/useParamId"
+
 import Uploadthing from "./Uploadthing"
 import ClearAllButton from "./buttons/ClearAllButton"
 
-import { useAutoAnimate } from "@formkit/auto-animate/react"
-import { BiCommand } from "react-icons/bi"
 import { IoReturnDownBackSharp } from "react-icons/io5"
-import toast from "react-hot-toast"
+import { BiCommand } from "react-icons/bi"
 
 export default function CreatItem() {
-  const { tab, setTab } = useNavContext()
   const utils = api.useUtils()
+
   const boardId = useParamId()
-  const [text, setText] = useState("")
-  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const [animationParent] = useAutoAnimate()
+
+  const { tab, setTab } = useNavContext()
+
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+  const [text, setText] = useState("")
 
   const { mutate, isLoading } = api.text.create.useMutation({
     onMutate: () => {

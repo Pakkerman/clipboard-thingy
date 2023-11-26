@@ -2,8 +2,9 @@
 
 import { createContext, useContext, useEffect, useState } from "react"
 import { api } from "~/trpc/react"
-import { useParamId } from "../hooks/useParamId"
 import toast from "react-hot-toast"
+
+import useParamId from "../hooks/useParamId"
 import usePinParams from "../hooks/usePinParams"
 
 type BoardContext = {
@@ -20,11 +21,14 @@ const BoardContext = createContext<BoardContext | null>(null)
 type BoardContextProvider = { children: React.ReactNode }
 export function BoardContextProvider(props: BoardContextProvider) {
   const { getPinParams, setPinParams } = usePinParams()
+  const id = useParamId()
+
+  const [pin, setPin] = useState(getPinParams())
   const [locked, setLocked] = useState(true)
   const [loading, setLoading] = useState(true)
-  const [pin, setPin] = useState(getPinParams())
-  const id = useParamId()
+
   const utils = api.useUtils()
+
   const { data: boardData, isLoading: isLoadingBoard } =
     api.board.getBoard.useQuery({
       id: id as string,

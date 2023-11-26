@@ -3,12 +3,13 @@
 import React from "react"
 
 import { useThemeContext } from "~/app/context/ThemeContext"
-import { FiSun, FiMoon } from "react-icons/fi"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 
+import { FiSun, FiMoon } from "react-icons/fi"
+
 export function ThemeButton() {
-  const { theme, toggleTheme } = useThemeContext()
   const [animationParent] = useAutoAnimate()
+  const { theme, toggleTheme } = useThemeContext()
 
   return (
     <button

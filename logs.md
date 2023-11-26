@@ -134,3 +134,6 @@ Get delete all working.
 - [ ] TODO: Overflow scroll indicator for text list items.
 - [ ] TODO: Scroll snap for id/page
 - 
+
+### 1125
+- Redesign layout

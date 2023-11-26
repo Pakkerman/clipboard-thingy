@@ -1,11 +1,11 @@
 import React from "react"
+import { api } from "~/trpc/react"
 import toast from "react-hot-toast"
 
-import { api } from "~/trpc/react"
+import useParamId from "../hooks/useParamId"
 
 import { FileThumbnail } from "./FileThumbnail"
 import { isImageFile } from "~/app/lib/helpers"
-import { useParamId } from "../hooks/useParamId"
 
 import { HiOutlineDocumentText, HiOutlinePhotograph } from "react-icons/hi"
 import { FiDownload } from "react-icons/fi"
@@ -13,6 +13,7 @@ import { FiTrash2 } from "react-icons/fi"
 
 export function FileList() {
   const utils = api.useUtils()
+
   const boardId = useParamId()
 
   const { data, isLoading } = api.file.getAll.useQuery({ boardId })

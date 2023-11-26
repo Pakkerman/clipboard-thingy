@@ -1,8 +1,9 @@
 "use client"
 
 import React, { useEffect, useRef } from "react"
-import { useBoardContext } from "../context/BoardContext"
 import { isDesktop } from "react-device-detect"
+
+import { useBoardContext } from "../context/BoardContext"
 
 import { BsBackspace } from "react-icons/bs"
 import { CiRedo } from "react-icons/ci"
@@ -12,10 +13,11 @@ type PinPadProps = {
   pin: string
   setPin: React.Dispatch<React.SetStateAction<string>>
 }
-export function PasscodeInput(props: PinPadProps) {
-  const inputRef = useRef<HTMLInputElement>(null)
+export default function PasscodeInput(props: PinPadProps) {
   const { locked } = useBoardContext()
+
   const { pin, setPin } = props
+  const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     if (!isDesktop) return

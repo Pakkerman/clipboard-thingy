@@ -1,16 +1,19 @@
 "use client"
 
 import React, { useEffect, useRef, useState } from "react"
-import useLocalBoardData from "../hooks/useLocalBoardData"
-import { setLocalData } from "../lib/localStorageHelpers"
-import { LoadingSpinner } from "./LoadingSpinner"
 import { useRouter } from "next/navigation"
 import { isDesktop } from "react-device-detect"
 
+import useLocalBoardData from "../hooks/useLocalBoardData"
+import { setLocalData } from "../lib/localStorageHelpers"
+
+import LoadingSpinner from "./LoadingSpinner"
+
 export default function BoardManager() {
-  const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const { inputId, setInputId, loading } = useLocalBoardData()
+
+  const inputRef = useRef<HTMLInputElement>(null)
   const [starting, setStarting] = useState(false)
 
   const handleKeyPress = (event: KeyboardEvent) => {

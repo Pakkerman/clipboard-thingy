@@ -1,6 +1,6 @@
 import React from "react"
 
-export function LoadingSpinner() {
+export default function LoadingSpinner() {
   return (
     <section className="flex h-full w-full items-center justify-center">
       <div className=" h-[min(100%,100px)] w-[min(100%,100px)]" role="status">

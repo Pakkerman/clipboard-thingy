@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation"
 
-export function useParamId() {
+export default function useParamId() {
   const { id } = useParams()
   return id!.toString().padStart(6, "0")
 }

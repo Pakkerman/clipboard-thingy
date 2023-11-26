@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react"
+
 import { useNavContext } from "../context/NavContext"
 
 export default function Nav() {

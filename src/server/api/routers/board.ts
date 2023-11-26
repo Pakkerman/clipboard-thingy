@@ -9,7 +9,7 @@ export const boardRouter = createTRPCRouter({
   }),
 
   getBoard: publicProcedure
-    .input(z.object({ id: z.string() }))
+    .input(z.object({ id: z.string().min(1).max(6) }))
     .query(({ ctx, input }) => {
       return ctx.db.query.board.findFirst({
         where: eq(board.boardId, input.id),

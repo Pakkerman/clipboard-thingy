@@ -1,14 +1,14 @@
 import React, { useState } from "react"
 import { useParams } from "next/navigation"
+
 import { useBoardContext } from "../context/BoardContext"
-import { useAutoAnimate } from "@formkit/auto-animate/react"
 
 export default function PinManager() {
-  const [animationParent] = useAutoAnimate()
   const { id } = useParams()
+  const { boardData, handleUpdatePin } = useBoardContext()
+
   const [changePinInput, setChangePinInput] = useState("")
   const [showPinInput, setShowPinInput] = useState(false)
-  const { boardData, handleUpdatePin } = useBoardContext()
 
   return (
     <div className=" flex min-h-[100px] flex-col items-center justify-center">

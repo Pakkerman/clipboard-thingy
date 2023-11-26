@@ -1,21 +1,26 @@
 "use client"
 
-import { useAutoAnimate } from "@formkit/auto-animate/react"
 import React, { useEffect, useState } from "react"
-import toast from "react-hot-toast"
 import { api } from "~/trpc/react"
-import { MdCancel, MdCheckCircle } from "react-icons/md"
+import toast from "react-hot-toast"
+import { useAutoAnimate } from "@formkit/auto-animate/react"
+
+import useParamId from "~/app/hooks/useParamId"
 import { useNavContext } from "~/app/context/NavContext"
-import { useParamId } from "~/app/hooks/useParamId"
 import { useBoardContext } from "~/app/context/BoardContext"
+
+import { MdCancel, MdCheckCircle } from "react-icons/md"
 
 export default function ClearAllButton() {
   const utils = api.useUtils()
-  const { tab } = useNavContext()
-  const [pending, setPending] = useState(false)
-  const boardId = useParamId()
+
   const [animationParent] = useAutoAnimate()
+  const boardId = useParamId()
+
   const { locked } = useBoardContext()
+  const { tab } = useNavContext()
+
+  const [pending, setPending] = useState(false)
 
   const { mutate: deleteAllText } = api.text.deleteAll.useMutation({
     onSuccess: () => {
