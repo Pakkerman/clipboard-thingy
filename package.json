@@ -7,7 +7,7 @@
     "db:push": "dotenv drizzle-kit push:mysql",
     "db:generate": "dotenv drizzle-kit generate:mysql",
     "db:studio": "dotenv drizzle-kit studio",
-    "dev": "next dev",
+    "dev": "~/scripts/getDevServerAddress.sh; next dev ",
     "lint": "next lint",
     "start": "next start"
   },

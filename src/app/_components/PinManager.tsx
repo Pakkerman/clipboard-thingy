@@ -3,6 +3,8 @@ import { useParams } from "next/navigation"
 
 import { useBoardContext } from "../context/BoardContext"
 
+import ButtonWrapper from "./wrappers/ButtonWrapper"
+
 export default function PinManager() {
   const { id } = useParams()
   const { boardData, handleUpdatePin } = useBoardContext()
@@ -11,35 +13,44 @@ export default function PinManager() {
   const [showPinInput, setShowPinInput] = useState(false)
 
   return (
-    <div className=" flex min-h-[100px] flex-col items-center justify-center">
+    <div className="flex min-h-[100px] w-full flex-col items-center  justify-center">
       <p>
         This is board <i className="font-bold">{id}</i>
       </p>
-      {!boardData.pin ?? <p>Set a pin to lock this board</p>}
+      {}
       <br />
-      {/* <div className="pre h-[50px] w-[232px]" ref={animationParent}> */}
-      <input
-        className="w-[232px] rounded-xl border border-black/20 border-red-400 p-1 text-center text-xl accent-orange-500 shadow-inner shadow-orange-950/40 
+
+      {showPinInput ? (
+        <input
+          className="h-[35px] w-[232px] rounded-xl border border-black/20 border-red-400 p-1 text-center text-xl accent-orange-500 shadow-inner shadow-orange-950/40
             transition dark:text-orange-950"
-        value={changePinInput}
-        minLength={4}
-        maxLength={4}
-        placeholder={boardData?.pin ? boardData.pin : "----"}
-        onChange={(event) => setChangePinInput(event.target.value)}
-      />
-      {/* {showPinInput && (
-        )} */}
-      {/* </div> */}
-      {!boardData?.pin && <p>Set pin to claim this board</p>}
+          value={changePinInput}
+          minLength={4}
+          maxLength={4}
+          placeholder={boardData?.pin ? boardData.pin : "----"}
+          onChange={(event) => setChangePinInput(event.target.value)}
+        />
+      ) : !boardData.pin ? (
+        <p>Set a pin to claim this board</p>
+      ) : (
+        <p className="leading-[35px]">This board is protected by pin code</p>
+      )}
+
       <br />
       <button
-        className="w-[90%] rounded-md border-[0.5px] border-black/20 px-4 py-2"
+        className="w-[90%]"
         onClick={() => {
           setShowPinInput(!showPinInput)
           if (showPinInput) handleUpdatePin(changePinInput)
         }}
       >
-        {boardData?.pin ? "Change pin" : "Set pin"}
+        <ButtonWrapper>
+          {boardData?.pin
+            ? showPinInput
+              ? "Confirm"
+              : "Change pin"
+            : "Set pin"}
+        </ButtonWrapper>
       </button>
 
       {/* <p>

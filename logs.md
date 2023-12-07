@@ -132,8 +132,12 @@ Get delete all working.
 ### 1124
 - Redesign layout to fit with mobile nav, using h-200vh to give the 2 screen of height, and in that with 2 sections that each is h-100vh, and in those, having another div for 100dvh for scaling the elements inside correctly, while prevent the whole page height shifting while scrolling.
 - [ ] TODO: Overflow scroll indicator for text list items.
-- [ ] TODO: Scroll snap for id/page
-- 
+- [x] TODO: Scroll snap for id/page
 
 ### 1125
 - Redesign layout
+- Refector, ordering and grouping imports and componets
+
+### 1128
+- [x] TODO: Fix create section animation problem when switching between texts and files
+- [ ] TODO: Desktop layout

@@ -60,12 +60,12 @@ export default function BoardManager() {
         onChange={(event) => setInputId(event.target.value)}
       />
       {/* dev testing button to reset localStorage */}
-      <button
+      {/* <button
         className="border-2"
         onClick={() => localStorage.removeItem("clipboard")}
       >
         testing: clearn local boardId
-      </button>
+      </button> */}
     </section>
   )
 }

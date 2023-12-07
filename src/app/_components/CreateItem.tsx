@@ -13,18 +13,32 @@ import ClearAllButton from "./buttons/ClearAllButton"
 
 import { IoReturnDownBackSharp } from "react-icons/io5"
 import { BiCommand } from "react-icons/bi"
+import ShortcutWrapper from "./wrappers/ShortcutWrapper"
 
 export default function CreatItem() {
-  const utils = api.useUtils()
-
-  const boardId = useParamId()
   const [animationParent] = useAutoAnimate()
+  const { tab } = useNavContext()
 
-  const { tab, setTab } = useNavContext()
+  return (
+    <section
+      className="flex min-h-[200px] w-full flex-col justify-between font-chakraPetch transition-all"
+      ref={animationParent}
+    >
+      {tab === "text" && <CreateTextWizard />}
+      {tab === "file" && <Uploadthing />}
+      <ClearAllButton />
+    </section>
+  )
+}
+
+function CreateTextWizard() {
+  const boardId = useParamId()
+  const { setTab } = useNavContext()
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const [text, setText] = useState("")
 
+  const utils = api.useUtils()
   const { mutate, isLoading } = api.text.create.useMutation({
     onMutate: () => {
       if (text.length === 0 && textareaRef.current) textareaRef.current.focus()
@@ -55,48 +69,35 @@ export default function CreatItem() {
   }, [text])
 
   return (
-    <section
-      className="h-min min-h-[150px] w-full font-chakraPetch transition-all"
-      ref={animationParent}
-    >
-      {tab === "text" && (
-        <>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              mutate({ text, boardId })
-            }}
-            className="flex flex-col gap-4 px-4"
-          >
-            {text.length > 3000 && <div className="text-red-400">too long</div>}
-            <textarea
-              ref={textareaRef}
-              className="w-full rounded-lg px-4 py-2 text-black shadow-md"
-              onChange={(e) => setText(e.target.value)}
-              placeholder="Type Something"
-              value={text}
-              minLength={1}
-              cols={30}
-              rows={calculateTextAreaHeight(textareaRef.current?.scrollHeight)}
-            />
-            <button
-              type="submit"
-              className="relative select-none rounded-xl border-[0.5px] border-orange-400 border-slate-900/20 bg-orange-400 p-2 text-lg text-orange-950 shadow-md  shadow-orange-950/30 transition hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950"
-              disabled={isLoading || text.length === 0}
-            >
-              {isLoading ? "Pasting..." : "Paste"}
-              <div className="absolute right-5 top-[50%] flex translate-y-[-50%] scale-75 items-center gap-2 opacity-50">
-                <BiCommand className="h-8 w-8 rounded-xl border border-black/20 p-1" />
-                +
-                <IoReturnDownBackSharp />
-              </div>
-            </button>
-          </form>
-        </>
-      )}
-      {tab === "file" && <Uploadthing />}
-      <ClearAllButton />
-    </section>
+    <>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          mutate({ text, boardId })
+        }}
+        className="flex flex-col gap-4 px-4"
+      >
+        {text.length > 3000 && <div className="text-red-400">too long</div>}
+        <textarea
+          ref={textareaRef}
+          className="w-full rounded-lg px-4 py-2 text-black shadow-md"
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Type Something"
+          value={text}
+          minLength={1}
+          cols={30}
+          rows={calculateTextAreaHeight(textareaRef.current?.scrollHeight)}
+        />
+        <button
+          type="submit"
+          className="relative select-none rounded-xl border-[0.5px] border-orange-400 border-slate-900/20 bg-orange-400 p-2 text-lg text-orange-950 shadow-md  shadow-orange-950/30 transition hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950"
+          disabled={isLoading || text.length === 0}
+        >
+          {isLoading ? "Pasting..." : "Paste"}
+          <ShortcutWrapper shortcuts={["cmd", "enter"]} />
+        </button>
+      </form>
+    </>
   )
 }
 

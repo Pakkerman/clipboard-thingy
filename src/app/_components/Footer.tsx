@@ -5,7 +5,7 @@ import { AiOutlineGithub } from "react-icons/ai"
 
 export default function Footer() {
   return (
-    <footer className="flex w-[100vw] items-center justify-center gap-2 p-2 font-chakraPetch text-xs text-gray-600 dark:text-orange-200/90">
+    <footer className="flex w-full items-center justify-center gap-2 p-2 font-chakraPetch text-xs text-gray-600 dark:text-orange-200/90">
       <p className="">A project by Pakerman</p>
       <Link
         href="https://github.com/Pakkerman/clipboard-thingy"
