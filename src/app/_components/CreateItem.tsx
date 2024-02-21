@@ -37,6 +37,8 @@ function CreateTextWizard() {
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const [text, setText] = useState("")
+  const [placeholder, setPlaceholder] = useState("type something")
+  const [_window, setWindow] = useState<Window | null>(null)
 
   const utils = api.useUtils()
   const { mutate, isLoading } = api.text.create.useMutation({
@@ -68,6 +70,11 @@ function CreateTextWizard() {
     return () => window.removeEventListener("keydown", handleKeyPress)
   }, [text])
 
+  // set placeholder from clipboard
+  if (window) {
+    window.navigator.clipboard.readText().then((item) => setPlaceholder(item))
+  }
+
   return (
     <>
       <form
@@ -82,7 +89,7 @@ function CreateTextWizard() {
           ref={textareaRef}
           className="w-full rounded-lg px-4 py-2 text-black shadow-md"
           onChange={(e) => setText(e.target.value)}
-          placeholder="Type Something"
+          placeholder={placeholder}
           value={text}
           minLength={1}
           cols={30}
