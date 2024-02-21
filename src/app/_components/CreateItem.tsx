@@ -38,7 +38,7 @@ function CreateTextWizard() {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const [text, setText] = useState("")
   const [placeholder, setPlaceholder] = useState("type something")
-  const [_window, setWindow] = useState<Window | null>(null)
+  const formRef = useRef<HTMLFormElement | null>(null)
 
   const utils = api.useUtils()
   const { mutate, isLoading } = api.text.create.useMutation({
@@ -61,8 +61,9 @@ function CreateTextWizard() {
   })
 
   function handleKeyPress(event: KeyboardEvent) {
-    if (text.length === 0) return
-    if (event.key === "Enter" && event.metaKey) mutate({ text, boardId })
+    if (event.key === "Enter" && event.metaKey) {
+      if (formRef.current) formRef.current.requestSubmit()
+    }
   }
 
   useEffect(() => {
@@ -78,9 +79,12 @@ function CreateTextWizard() {
   return (
     <>
       <form
+        ref={formRef}
         onSubmit={(e) => {
+          console.log("here????")
           e.preventDefault()
-          mutate({ text, boardId })
+          const content: string = text.length ? text : placeholder
+          mutate({ text: content, boardId })
         }}
         className="flex flex-col gap-4 px-4"
       >
@@ -98,9 +102,13 @@ function CreateTextWizard() {
         <button
           type="submit"
           className="relative select-none rounded-xl border-[0.5px] border-orange-400 border-slate-900/20 bg-orange-400 p-2 text-lg text-orange-950 shadow-md  shadow-orange-950/30 transition hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950"
-          disabled={isLoading || text.length === 0}
+          disabled={isLoading}
         >
-          {isLoading ? "Pasting..." : "Paste"}
+          {isLoading
+            ? "Pasting..."
+            : text.length
+            ? "Paste"
+            : "Paste from clipboard"}
           <ShortcutWrapper shortcuts={["cmd", "enter"]} />
         </button>
       </form>
