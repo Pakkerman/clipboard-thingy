@@ -89,7 +89,7 @@ function CreateTextWizard() {
         {text.length > 3000 && <div className="text-red-400">too long</div>}
         <textarea
           ref={textareaRef}
-          className="w-full rounded-lg px-4 py-2 text-black shadow-md"
+          className="w-full rounded-lg px-4 py-2 text-black shadow-md placeholder:italic"
           onChange={(e) => setText(e.target.value)}
           placeholder={placeholder}
           value={text}
@@ -99,8 +99,10 @@ function CreateTextWizard() {
         />
         <button
           type="submit"
-          className="relative select-none rounded-xl border-[0.5px] border-orange-400 border-slate-900/20 bg-orange-400 p-2 text-lg text-orange-950 shadow-md  shadow-orange-950/30 transition hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950"
-          disabled={isLoading}
+          className="relative select-none rounded-xl border-[0.5px] border-orange-400 border-slate-900/20 bg-orange-400 p-2 text-lg text-orange-950 shadow-md  shadow-orange-950/30 transition hover:bg-orange-500 hover:shadow-none hover:shadow-orange-950 active:shadow-inner active:shadow-orange-950 disabled:bg-opacity-80 disabled:text-opacity-60"
+          disabled={
+            isLoading || (text.length === 0 && placeholder === "type something")
+          }
         >
           {isLoading
             ? "Pasting..."
