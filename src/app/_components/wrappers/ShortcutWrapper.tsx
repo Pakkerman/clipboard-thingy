@@ -3,7 +3,7 @@ import { isMobile } from "react-device-detect"
 
 import { BsArrowReturnLeft } from "react-icons/bs"
 import { ImCommand } from "react-icons/im"
-const ButtonIcon = {
+const ButtonIcon: { [key: string]: JSX.Element } = {
   cmd: <ImCommand />,
   enter: <BsArrowReturnLeft />,
 }

@@ -11,8 +11,6 @@ import useParamId from "../hooks/useParamId"
 import Uploadthing from "./Uploadthing"
 import ClearAllButton from "./buttons/ClearAllButton"
 
-import { IoReturnDownBackSharp } from "react-icons/io5"
-import { BiCommand } from "react-icons/bi"
 import ShortcutWrapper from "./wrappers/ShortcutWrapper"
 
 export default function CreatItem() {
@@ -107,8 +105,8 @@ function CreateTextWizard() {
           {isLoading
             ? "Pasting..."
             : text.length
-            ? "Paste"
-            : "Paste from clipboard"}
+              ? "Paste"
+              : "Paste from clipboard"}
           <ShortcutWrapper shortcuts={["cmd", "enter"]} />
         </button>
       </form>
