@@ -2,59 +2,45 @@
 // https://orm.drizzle.team/docs/sql-schema-declaration
 
 import { sql } from "drizzle-orm"
-import {
-  text,
-  bigint,
-  index,
-  mysqlTableCreator,
-  timestamp,
-  varchar,
-  int,
-} from "drizzle-orm/mysql-core"
+import { int, sqliteTableCreator, text } from "drizzle-orm/sqlite-core"
 
-/**
- * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
- * database instance for multiple projects.
- *
- * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
- */
-export const mysqlTable = mysqlTableCreator((name) => `clipbroker_${name}`)
+export const createTable = sqliteTableCreator((name) => name)
 
-export const texts = mysqlTable("text", {
-  id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+export const texts = createTable("text", {
+  id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
 
-  boardId: varchar("boardId", { length: 16 }),
+  boardId: text("boardId", { length: 16 }),
   content: text("content"),
 
-  createdAt: timestamp("created_at")
+  createdAt: text("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
-  updatedAt: timestamp("updatedAt").onUpdateNow(),
+  updatedAt: int("updated_at", { mode: "timestamp" }),
 })
 
-export const files = mysqlTable("file", {
-  id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+export const files = createTable("file", {
+  id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
 
-  boardId: varchar("boardId", { length: 16 }),
-  name: varchar("fileName", { length: 256 }).notNull(),
-  key: varchar("key", { length: 256 }).notNull(),
-  url: varchar("url", { length: 256 }).notNull(),
+  boardId: text("boardId", { length: 16 }),
+  name: text("fileName", { length: 256 }).notNull(),
+  key: text("key", { length: 256 }).notNull(),
+  url: text("url", { length: 256 }).notNull(),
   size: int("size").notNull(),
 
-  createdAt: timestamp("created_at")
+  createdAt: text("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
-  updatedAt: timestamp("updatedAt").onUpdateNow(),
+  updatedAt: int("updated_at", { mode: "timestamp" }),
 })
 
-export const board = mysqlTable("board", {
-  id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+export const board = createTable("board", {
+  id: int("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
 
-  boardId: varchar("boardId", { length: 6 }).unique().notNull(),
-  pin: varchar("pin", { length: 4 }),
+  boardId: text("boardId", { length: 6 }).unique().notNull(),
+  pin: text("pin", { length: 4 }),
 
-  createdAt: timestamp("created_at")
+  createdAt: text("created_at")
     .default(sql`CURRENT_TIMESTAMP`)
     .notNull(),
-  updatedAt: timestamp("updatedAt").onUpdateNow(),
+  updatedAt: int("updated_at", { mode: "timestamp" }),
 })
